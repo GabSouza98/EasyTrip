@@ -3,7 +3,6 @@ package io.github.cwireset.tcc.service;
 import io.github.cwireset.tcc.domain.Usuario;
 import io.github.cwireset.tcc.exception.usuario.*;
 import io.github.cwireset.tcc.repository.UsuarioRepository;
-import io.github.cwireset.tcc.validator.ValidacaoUsuario;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +20,7 @@ public class UsuarioService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public Usuario cadastrarUsuario(Usuario usuarioRequest) throws CpfInvalidoException, CepInvalidoException, EmailDuplicadoException, CpfDuplicadoException {
-
-        new ValidacaoUsuario().accept(usuarioRequest);
+    public Usuario cadastrarUsuario(Usuario usuarioRequest) throws Exception {
 
         if(!isNull(usuarioRepository.findByEmailEquals(usuarioRequest.getEmail()))) {
             throw new EmailDuplicadoException(usuarioRequest.getEmail());
@@ -48,6 +45,17 @@ public class UsuarioService {
         } else {
             throw new UsuarioNaoEncontradoException(idUsuario);
         }
+    }
 
+
+    public Usuario buscarUsuarioPorCpf(String cpf) throws CpfNaoEncontradoException {
+
+        Usuario usuarioProcurado = usuarioRepository.findByCpfEquals(cpf);
+
+        if(isNull(usuarioProcurado)){
+            throw new CpfNaoEncontradoException(cpf);
+        } else {
+            return usuarioProcurado;
+        }
     }
 }

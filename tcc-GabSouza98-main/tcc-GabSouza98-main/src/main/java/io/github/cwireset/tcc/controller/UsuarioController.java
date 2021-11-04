@@ -1,8 +1,7 @@
 package io.github.cwireset.tcc.controller;
 
 import io.github.cwireset.tcc.domain.Usuario;
-import io.github.cwireset.tcc.exception.usuario.CpfInvalidoException;
-import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
+import io.github.cwireset.tcc.exception.usuario.CpfNaoEncontradoException;
 import io.github.cwireset.tcc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +29,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/{idUsuario}")
-    public Usuario buscarUsuario(@PathVariable Long idUsuario) throws Exception {
+    public Usuario buscarUsuarioPorId(@PathVariable Long idUsuario) throws Exception {
         return this.usuarioService.buscarUsuarioPorId(idUsuario);
+    }
+
+    @GetMapping("/cpf/{cpf}")
+    public Usuario buscarUsuarioPorCpf(@PathVariable String cpf) throws CpfNaoEncontradoException {
+        return this.usuarioService.buscarUsuarioPorCpf(cpf);
     }
 
 

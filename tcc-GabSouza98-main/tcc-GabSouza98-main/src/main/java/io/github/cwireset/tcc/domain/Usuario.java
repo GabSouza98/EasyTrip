@@ -28,6 +28,7 @@ public class Usuario {
     @NotBlank
     private String senha;
     @NotBlank
+    @Pattern(regexp = "\\d{11}", message = "O CPF deve ser informado no formato 99999999999.")
     private String cpf;
     @NotNull
 //    @JsonFormat(pattern="dd/MM/yyyy")

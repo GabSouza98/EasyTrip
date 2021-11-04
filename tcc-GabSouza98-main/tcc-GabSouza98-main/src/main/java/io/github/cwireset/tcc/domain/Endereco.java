@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Getter
@@ -21,6 +22,7 @@ public class Endereco {
     private Long id;
 
     @NotBlank
+    @Pattern(regexp = "\\d{5}-\\d{3}", message = "O CEP deve ser informado no formato 99999-999.")
     private String cep;
     @NotBlank
     private String logradouro;
