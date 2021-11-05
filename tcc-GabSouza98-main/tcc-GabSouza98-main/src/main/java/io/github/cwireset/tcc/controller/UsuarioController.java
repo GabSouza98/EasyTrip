@@ -1,7 +1,11 @@
 package io.github.cwireset.tcc.controller;
 
 import io.github.cwireset.tcc.domain.Usuario;
+import io.github.cwireset.tcc.exception.usuario.CpfDuplicadoException;
 import io.github.cwireset.tcc.exception.usuario.CpfNaoEncontradoException;
+import io.github.cwireset.tcc.exception.usuario.EmailDuplicadoException;
+import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
+import io.github.cwireset.tcc.request.AtualizarUsuarioRequest;
 import io.github.cwireset.tcc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +40,11 @@ public class UsuarioController {
     @GetMapping("/cpf/{cpf}")
     public Usuario buscarUsuarioPorCpf(@PathVariable String cpf) throws CpfNaoEncontradoException {
         return this.usuarioService.buscarUsuarioPorCpf(cpf);
+    }
+
+    @PutMapping("/{id}")
+    public Usuario atualizarUsuario(@PathVariable Long id, @Valid @RequestBody AtualizarUsuarioRequest atualizarUsuarioRequest) throws Exception {
+        return this.usuarioService.atualizarUsuario(id, atualizarUsuarioRequest);
     }
 
 
