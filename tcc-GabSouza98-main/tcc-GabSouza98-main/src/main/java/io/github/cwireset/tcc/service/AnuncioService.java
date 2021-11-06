@@ -4,6 +4,7 @@ import io.github.cwireset.tcc.domain.Anuncio;
 import io.github.cwireset.tcc.domain.Imovel;
 import io.github.cwireset.tcc.domain.Usuario;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioDuplicadoException;
+import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.repository.AnuncioRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.isNull;
 
@@ -45,18 +47,36 @@ public class AnuncioService {
                 anunciante,
                 cadastrarAnuncioRequest.getValorDiaria(),
                 cadastrarAnuncioRequest.getFormasAceitas(),
-                cadastrarAnuncioRequest.getDescricao());
+                cadastrarAnuncioRequest.getDescricao(),
+                true);
 
         anuncioRepository.save(anuncio);
         return anuncio;
     }
 
     public List<Anuncio> listarAnuncios() {
-        return anuncioRepository.findAll();
+        return anuncioRepository.findByAtivoIsTrue();
     }
 
     public List<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante) {
-        return anuncioRepository.findByAnuncianteId(idAnunciante);
+        return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante);
 
+    }
+
+    public Anuncio buscarAnuncioPorId(Long id) throws AnuncioNaoEncontradoException {
+
+        Optional<Anuncio> anuncioProcurado = anuncioRepository.findById(id);
+        if(anuncioProcurado.isPresent()) {
+            return anuncioProcurado.get();
+        } else {
+            throw new AnuncioNaoEncontradoException(id);
+        }
+    }
+
+    public void excluirAnuncioPorId(Long idAnuncio) throws AnuncioNaoEncontradoException {
+
+        Anuncio anuncioParaExcluir = buscarAnuncioPorId(idAnuncio);
+        anuncioParaExcluir.setAtivo(false);
+        anuncioRepository.save(anuncioParaExcluir);
     }
 }

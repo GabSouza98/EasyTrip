@@ -6,11 +6,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AnuncioRepository extends CrudRepository<Anuncio,Integer> {
 
     Anuncio findByImovelId(Long idImovel);
     List<Anuncio> findAll();
-    List<Anuncio> findByAnuncianteId(Long id);
+    List<Anuncio> findByAtivoIsTrue();
+    List<Anuncio> findByAnuncianteIdAndAtivoIsTrue(Long id);
+    Optional<Anuncio> findById(Long id);
 }
