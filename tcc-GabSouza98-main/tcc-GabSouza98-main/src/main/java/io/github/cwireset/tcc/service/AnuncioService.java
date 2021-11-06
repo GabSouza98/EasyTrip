@@ -11,6 +11,8 @@ import io.github.cwireset.tcc.request.CadastrarAnuncioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static java.util.Objects.isNull;
 
 @Service
@@ -47,5 +49,9 @@ public class AnuncioService {
 
         anuncioRepository.save(anuncio);
         return anuncio;
+    }
+
+    public List<Anuncio> listarAnuncios() {
+        return anuncioRepository.findAll();
     }
 }

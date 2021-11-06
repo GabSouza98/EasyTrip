@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/anuncios")
@@ -21,6 +22,11 @@ public class AnuncioController {
     @ResponseStatus(HttpStatus.CREATED)
     public Anuncio cadastrarAnuncio(@Valid @RequestBody CadastrarAnuncioRequest cadastrarAnuncioRequest) throws Exception {
         return this.anuncioService.cadastrarAnuncio(cadastrarAnuncioRequest);
+    }
+
+    @GetMapping
+    public List<Anuncio> listarAnuncios() {
+        return this.anuncioService.listarAnuncios();
     }
 
 
