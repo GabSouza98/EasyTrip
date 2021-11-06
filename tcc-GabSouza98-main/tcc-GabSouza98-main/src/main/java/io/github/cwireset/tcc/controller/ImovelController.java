@@ -1,6 +1,7 @@
 package io.github.cwireset.tcc.controller;
 
 import io.github.cwireset.tcc.domain.Imovel;
+import io.github.cwireset.tcc.exception.imovel.ImovelAtreladoAnuncioAtivoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.request.CadastrarImovelRequest;
@@ -41,7 +42,7 @@ public class ImovelController {
     }
 
     @DeleteMapping("/{idImovel}")
-    public void excluirImovel(@PathVariable Long idImovel) throws ImovelNaoEncontradoException {
+    public void excluirImovel(@PathVariable Long idImovel) throws ImovelNaoEncontradoException, ImovelAtreladoAnuncioAtivoException {
         this.imovelService.excluirImovelPorId(idImovel);
 
     }

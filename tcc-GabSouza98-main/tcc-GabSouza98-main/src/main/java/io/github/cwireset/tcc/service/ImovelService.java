@@ -2,6 +2,7 @@ package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.Imovel;
 import io.github.cwireset.tcc.domain.Usuario;
+import io.github.cwireset.tcc.exception.imovel.ImovelAtreladoAnuncioAtivoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.repository.ImovelRepository;
@@ -24,7 +25,8 @@ public class ImovelService {
     @Autowired
     private UsuarioService usuarioService;
 
-    ModelMapper modelMapper = new ModelMapper();
+    @Autowired
+    private AnuncioService anuncioService;
 
     public Imovel cadastrarImovel(CadastrarImovelRequest cadastrarImovelRequest) throws UsuarioNaoEncontradoException {
 
@@ -65,10 +67,20 @@ public class ImovelService {
         }
     }
 
-    public void excluirImovelPorId(Long idImovel) throws ImovelNaoEncontradoException {
+    public void excluirImovelPorId(Long idImovel) throws ImovelNaoEncontradoException, ImovelAtreladoAnuncioAtivoException {
 
         Imovel imovelProcurado = listarImovelPorId(idImovel);
+        //trocar por apenas verificaImovelAtreladoAnuncio?
+        verificaImovelAtreladoAnuncioAtivo(idImovel);
         imovelRepository.delete(imovelProcurado);
+
+    }
+
+    public void verificaImovelAtreladoAnuncioAtivo(Long idImovel) throws ImovelAtreladoAnuncioAtivoException {
+
+        if(anuncioService.buscarPorImovelId(idImovel)) {
+            throw new ImovelAtreladoAnuncioAtivoException();
+        }
 
     }
 }

@@ -54,6 +54,15 @@ public class AnuncioService {
         return anuncio;
     }
 
+    public Boolean buscarPorImovelId(Long idImovel) {
+        //trocar por apenas findByImovelId?
+        if(isNull(anuncioRepository.findByImovelIdAndAtivoIsTrue(idImovel))) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public List<Anuncio> listarAnuncios() {
         return anuncioRepository.findByAtivoIsTrue();
     }
