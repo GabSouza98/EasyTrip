@@ -27,17 +27,11 @@ public class CadastrarImovelRequest {
 
     @NotNull
     @Valid
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
     @Digits(integer = 100, fraction = 0)
-    @ManyToOne
-    @JoinColumn(name = "id_proprietario")
     private Long idProprietario;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "id_imovel")
     private List<CaracteristicaImovel> caracteristicas;
 
 }
