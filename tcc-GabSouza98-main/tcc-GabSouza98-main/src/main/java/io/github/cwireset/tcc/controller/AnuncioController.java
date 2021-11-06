@@ -29,6 +29,11 @@ public class AnuncioController {
         return this.anuncioService.listarAnuncios();
     }
 
+    @GetMapping("/anunciantes/{idAnunciante}")
+    public List<Anuncio> listarAnunciosPorIdAnunciante(@PathVariable Long idAnunciante) {
+        return this.anuncioService.listarAnunciosPorIdAnunciante(idAnunciante);
+    }
+
 
 
 }

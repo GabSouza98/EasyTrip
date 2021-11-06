@@ -54,4 +54,9 @@ public class AnuncioService {
     public List<Anuncio> listarAnuncios() {
         return anuncioRepository.findAll();
     }
+
+    public List<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante) {
+        return anuncioRepository.findByAnuncianteId(idAnunciante);
+
+    }
 }
