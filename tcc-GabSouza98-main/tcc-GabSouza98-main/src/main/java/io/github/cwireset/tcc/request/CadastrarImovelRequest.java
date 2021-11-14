@@ -29,6 +29,7 @@ public class CadastrarImovelRequest {
     @Valid
     private Endereco endereco;
 
+    @NotNull
     @Digits(integer = 100, fraction = 0)
     private Long idProprietario;
 

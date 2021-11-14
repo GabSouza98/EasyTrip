@@ -38,6 +38,7 @@ public class Anuncio {
 
     private String descricao;
 
+    @JsonIgnore
     private Boolean ativo;
 
 }
