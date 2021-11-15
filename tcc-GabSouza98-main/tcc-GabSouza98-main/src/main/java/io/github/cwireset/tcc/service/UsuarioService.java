@@ -9,6 +9,8 @@ import io.github.cwireset.tcc.repository.UsuarioRepository;
 import io.github.cwireset.tcc.request.AtualizarUsuarioRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,6 +56,10 @@ public class UsuarioService {
 
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
+    }
+
+    public Page<Usuario> listarUsuarios(Pageable pageable) {
+        return usuarioRepository.findAll(pageable);
     }
 
     public Usuario buscarUsuarioPorId(Long idUsuario) throws UsuarioNaoEncontradoException {
@@ -113,4 +119,6 @@ public class UsuarioService {
         usuarioRepository.save(usuarioAtualizado);
         return buscarUsuarioPorId(id);
     }
+
+
 }
