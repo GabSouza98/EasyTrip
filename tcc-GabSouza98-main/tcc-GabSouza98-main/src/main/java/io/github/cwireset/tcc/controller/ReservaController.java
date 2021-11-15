@@ -35,6 +35,12 @@ public class ReservaController {
     @GetMapping("/solicitantes/{idSolicitante}")
     public List<Reserva> consultarReservasPorSolicitante(@PathVariable Long idSolicitante, Periodo periodo) throws UsuarioNaoEncontradoException {
         return this.reservaService.consultarReservasPorSolicitante(idSolicitante, periodo);
-
     }
+
+    @GetMapping("/anuncios/anunciantes/{idAnunciante}")
+    public List<Reserva> consultarReservasPorAnunciante(@PathVariable Long idAnunciante) {
+        return this.reservaService.consultarReservasPorAnunciante(idAnunciante);
+    }
+
+
 }

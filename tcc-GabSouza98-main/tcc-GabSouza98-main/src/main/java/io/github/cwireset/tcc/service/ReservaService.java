@@ -71,11 +71,11 @@ public class ReservaService {
 
         List<Reserva> listaPeriodoDataHoraInicialBetween = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBetween(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
         List<Reserva> listaPeriodoDataHoraFinalBetween = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraFinalBetween(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
-        List<Reserva> listaPeriodoInicialBetween = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
+        List<Reserva> listaPeriodoMenorQueAReserva = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
 
         if( !listaPeriodoDataHoraInicialBetween.isEmpty() ||
             !listaPeriodoDataHoraFinalBetween.isEmpty() ||
-            !listaPeriodoInicialBetween.isEmpty() ) {
+            !listaPeriodoMenorQueAReserva.isEmpty() ) {
             throw new ConflitoAnuncioException();
         }
 
@@ -193,8 +193,12 @@ public class ReservaService {
 //        }
 //        List<Reserva> reservasFiltradas = new ArrayList<>(reservas);
 
-        List<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialAfterAndPeriodoDataHoraFinalBefore(id,periodo.getDataHoraInicial().minusMinutes(1),periodo.getDataHoraFinal().plusMinutes(1));
+        List<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialAfterAndPeriodoDataHoraFinalBefore(id,periodo.getDataHoraInicial().minusSeconds(1),periodo.getDataHoraFinal().plusSeconds(1));
 
         return reservasFiltradas;
+    }
+
+    public List<Reserva> consultarReservasPorAnunciante(Long idAnunciante) {
+        return reservaRepository.findByAnuncioAnuncianteId(idAnunciante);
     }
 }

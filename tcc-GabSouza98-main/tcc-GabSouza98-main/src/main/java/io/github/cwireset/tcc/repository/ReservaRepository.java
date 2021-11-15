@@ -29,4 +29,6 @@ public interface ReservaRepository extends CrudRepository<Reserva,Integer> {
 
     List<Reserva> findBySolicitanteIdAndPeriodoDataHoraInicialAfterAndPeriodoDataHoraFinalBefore(Long id, LocalDateTime d1, LocalDateTime d2);
 
+    List<Reserva> findByAnuncioAnuncianteId(Long id);
+
 }
