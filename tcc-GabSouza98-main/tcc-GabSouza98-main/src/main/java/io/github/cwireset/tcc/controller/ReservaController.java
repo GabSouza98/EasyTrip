@@ -1,12 +1,11 @@
 package io.github.cwireset.tcc.controller;
 
 
+import io.github.cwireset.tcc.domain.FormaPagamento;
 import io.github.cwireset.tcc.domain.Periodo;
 import io.github.cwireset.tcc.domain.Reserva;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
-import io.github.cwireset.tcc.exception.reserva.DataSaidaMenorQueDataEntradaException;
-import io.github.cwireset.tcc.exception.reserva.NumeroMinimoDiariasException;
-import io.github.cwireset.tcc.exception.reserva.SolicitanteIgualAnuncianteException;
+import io.github.cwireset.tcc.exception.reserva.*;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.request.CadastrarReservaRequest;
 import io.github.cwireset.tcc.response.InformacaoReservaResponse;
@@ -40,6 +39,11 @@ public class ReservaController {
     @GetMapping("/anuncios/anunciantes/{idAnunciante}")
     public List<Reserva> consultarReservasPorAnunciante(@PathVariable Long idAnunciante) {
         return this.reservaService.consultarReservasPorAnunciante(idAnunciante);
+    }
+
+    @PutMapping("/{idReserva}/pagamentos")
+    public void pagarReserva(@PathVariable Long idReserva, @Valid @RequestBody FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException {
+        this.reservaService.pagarReserva(idReserva, formaPagamento);
     }
 
 

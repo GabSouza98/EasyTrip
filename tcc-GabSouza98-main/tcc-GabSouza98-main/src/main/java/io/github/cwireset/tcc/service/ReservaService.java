@@ -17,10 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Objects.isNull;
 
@@ -201,4 +198,42 @@ public class ReservaService {
     public List<Reserva> consultarReservasPorAnunciante(Long idAnunciante) {
         return reservaRepository.findByAnuncioAnuncianteId(idAnunciante);
     }
+
+    public Reserva buscarReservaPorId(Long id) throws ReservaNaoEncontradaException {
+
+        Optional<Reserva> reserva = reservaRepository.findById(id);
+        if (reserva.isPresent()){
+            return reserva.get();
+        } else {
+            throw new ReservaNaoEncontradaException(id);
+        }
+
+    }
+
+    public void pagarReserva(Long idReserva, FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException {
+
+        Reserva reserva = buscarReservaPorId(idReserva);
+
+        List<FormaPagamento> formasAceitas = reserva.getAnuncio().getFormasAceitas();
+
+        if(formasAceitas.contains(formaPagamento)) {
+
+            if(reserva.getPagamento().getStatus().equals(StatusPagamento.PENDENTE)) {
+                reserva.getPagamento().setStatus(StatusPagamento.PAGO);
+                reserva.getPagamento().setFormaEscolhida(formaPagamento);
+                reserva.setStatusReserva();
+                reservaRepository.save(reserva);
+            }
+
+        } else {
+            String mensagemErro = String.format("O anúncio não aceita %s como forma de pagamento. As formas aceitas são ",formaPagamento);
+            for(int i=0; i<formasAceitas.size()-1;i++){
+                mensagemErro = mensagemErro.concat(String.format("%s, ",formasAceitas.get(i).getNomeForma()));
+            }
+            mensagemErro = mensagemErro.concat(String.format("%s.",formasAceitas.get(formasAceitas.size()-1).getNomeForma()));
+            throw new FormaPagamentoInvalidaException(mensagemErro);
+        }
+    }
+
+    
 }

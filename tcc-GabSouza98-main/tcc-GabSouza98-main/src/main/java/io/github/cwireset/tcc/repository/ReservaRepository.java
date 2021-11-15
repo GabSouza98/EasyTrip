@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface ReservaRepository extends CrudRepository<Reserva,Integer> {
+public interface ReservaRepository extends CrudRepository<Reserva,Long> {
 
     //Usadas em CadastrarReserva
     List<Reserva> findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraFinalBetween(Long id, LocalDateTime d1, LocalDateTime d2);
