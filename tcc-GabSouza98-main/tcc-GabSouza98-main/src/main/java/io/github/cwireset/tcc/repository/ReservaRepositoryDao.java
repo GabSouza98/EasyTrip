@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public class AnuncioRepositoryDao {
+public class ReservaRepositoryDao {
 
     EntityManager em;
 
-    public AnuncioRepositoryDao(EntityManager em) {
+    public ReservaRepositoryDao(EntityManager em) {
         this.em = em;
     }
 

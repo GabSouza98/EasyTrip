@@ -3,6 +3,7 @@ package io.github.cwireset.tcc.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
@@ -17,10 +18,12 @@ public class Periodo {
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern ="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataHoraInicial;
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dataHoraFinal;
 
 }

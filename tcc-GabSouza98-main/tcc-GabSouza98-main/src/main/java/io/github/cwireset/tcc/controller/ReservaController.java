@@ -12,6 +12,7 @@ import io.github.cwireset.tcc.request.CadastrarReservaRequest;
 import io.github.cwireset.tcc.response.InformacaoReservaResponse;
 import io.github.cwireset.tcc.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +33,8 @@ public class ReservaController {
     }
 
     @GetMapping("/solicitantes/{idSolicitante}")
-    public List<Reserva> consultarReservasPorSolicitante(@PathVariable Long id, @Valid @RequestParam(required = false) Periodo periodo) throws UsuarioNaoEncontradoException {
-        return this.reservaService.consultarReservasPorSolicitante(id, periodo);
+    public List<Reserva> consultarReservasPorSolicitante(@PathVariable Long idSolicitante, Periodo periodo) throws UsuarioNaoEncontradoException {
+        return this.reservaService.consultarReservasPorSolicitante(idSolicitante, periodo);
+
     }
-
-
-
-
-
 }

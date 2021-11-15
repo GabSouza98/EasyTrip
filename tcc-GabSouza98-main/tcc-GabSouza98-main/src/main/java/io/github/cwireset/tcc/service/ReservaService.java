@@ -1,10 +1,9 @@
 package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.*;
-import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.reserva.*;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
-import io.github.cwireset.tcc.repository.AnuncioRepositoryDao;
+import io.github.cwireset.tcc.repository.ReservaRepositoryDao;
 import io.github.cwireset.tcc.repository.ReservaRepository;
 import io.github.cwireset.tcc.request.CadastrarReservaRequest;
 import io.github.cwireset.tcc.response.DadosAnuncioResponse;
@@ -18,7 +17,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +37,7 @@ public class ReservaService {
     private AnuncioService anuncioService;
 
     @Autowired
-    private AnuncioRepositoryDao anuncioRepositoryDao;
+    private ReservaRepositoryDao reservaRepositoryDao;
 
     public InformacaoReservaResponse cadastrarReserva(CadastrarReservaRequest cadastrarReservaRequest) throws Exception {
 
@@ -170,26 +168,33 @@ public class ReservaService {
 
     public List<Reserva> consultarReservasPorSolicitante(Long id, Periodo periodo) throws UsuarioNaoEncontradoException {
 
-        //Verifica se foram informados os 2 parametros do período
-        if(!isNull(periodo)) {
+        //Verifica se foi informado o período
+        if(isNull(periodo)) {
+            return reservaRepository.findBySolicitanteId(id);
+        }
+
+        //Verifica se o período informado está completo
+        if(!isNull(periodo)){
             if(isNull(periodo.getDataHoraFinal()) || isNull(periodo.getDataHoraInicial())) {
                 return reservaRepository.findBySolicitanteId(id);
             }
         }
 
-        Set<Reserva> reservas = new HashSet<>();
+        //Considera que qualquer interseção nas datas já retorna a reserva. Mesma lógica do CadastrarReserva
+//        Set<Reserva> reservas = new HashSet<>();
+//        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraFinalBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
+//            reservas.add(r);
+//        }
+//        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
+//            reservas.add(r);
+//        }
+//        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
+//            reservas.add(r);
+//        }
+//        List<Reserva> reservasFiltradas = new ArrayList<>(reservas);
 
-        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraFinalBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-            reservas.add(r);
-        }
-        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-            reservas.add(r);
-        }
-        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-            reservas.add(r);
-        }
+        List<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialAfterAndPeriodoDataHoraFinalBefore(id,periodo.getDataHoraInicial().minusMinutes(1),periodo.getDataHoraFinal().plusMinutes(1));
 
-        List<Reserva> reservasFiltradas = new ArrayList<>(reservas);
         return reservasFiltradas;
     }
 }

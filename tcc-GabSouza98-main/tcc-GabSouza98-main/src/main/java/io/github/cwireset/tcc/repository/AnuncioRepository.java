@@ -17,4 +17,5 @@ public interface AnuncioRepository extends CrudRepository<Anuncio,Integer> {
     List<Anuncio> findByAnuncianteIdAndAtivoIsTrue(Long id);
     Anuncio findByImovelIdAndAtivoIsTrue(Long id);
     Optional<Anuncio> findById(Long id);
+
 }
