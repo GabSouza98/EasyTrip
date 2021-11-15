@@ -36,6 +36,8 @@ public class Usuario {
     @NotNull
     private LocalDate dataNascimento;
 
+    private String imagemAvatar;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco")
     @Valid

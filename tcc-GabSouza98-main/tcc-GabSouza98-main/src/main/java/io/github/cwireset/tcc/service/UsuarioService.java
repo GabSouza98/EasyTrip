@@ -1,5 +1,7 @@
 package io.github.cwireset.tcc.service;
 
+import io.github.cwireset.tcc.externalAPI.ClientFeign;
+import io.github.cwireset.tcc.externalAPI.PostDTO;
 import io.github.cwireset.tcc.domain.Endereco;
 import io.github.cwireset.tcc.domain.Usuario;
 import io.github.cwireset.tcc.exception.usuario.*;
@@ -20,6 +22,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ClientFeign clientFeign;
+
     ModelMapper modelMapper = new ModelMapper();
 
     public Usuario cadastrarUsuario(Usuario usuarioRequest) throws Exception {
@@ -32,7 +37,19 @@ public class UsuarioService {
             throw new CpfDuplicadoException(usuarioRequest.getCpf());
         }
 
-        Usuario usuario = modelMapper.map(usuarioRequest, Usuario.class);
+        PostDTO postDTO = clientFeign.buscarLink();
+
+        Usuario usuario = Usuario.builder()
+                .id(null)
+                .nome(usuarioRequest.getNome())
+                .cpf(usuarioRequest.getCpf())
+                .email(usuarioRequest.getEmail())
+                .senha(usuarioRequest.getSenha())
+                .dataNascimento(usuarioRequest.getDataNascimento())
+                .endereco(usuarioRequest.getEndereco())
+                .imagemAvatar(postDTO.getLink())
+                .build();
+
         usuarioRepository.save(usuario);
         return usuario;
     }
@@ -78,11 +95,11 @@ public class UsuarioService {
         if(!isNull(atualizarUsuarioRequest.getEndereco())) {
             enderecoNovo = atualizarUsuarioRequest.getEndereco();
         } else {
-            enderecoNovo = usuarioProcurado.getEndereco();
+            enderecoNovo = null;
         }
 
-        //Verifica se o endereço antigo existia, e define o ID do novo endereço como sendo do antigo
-        if(!isNull(usuarioProcurado.getEndereco())){
+        //Verifica se o endereço antigo existia, e se foi passado novo endereço
+        if(!isNull(usuarioProcurado.getEndereco()) && !isNull(enderecoNovo))  {
             enderecoNovo.setId(usuarioProcurado.getEndereco().getId());
         }
 
@@ -92,6 +109,7 @@ public class UsuarioService {
             atualizarUsuarioRequest.getSenha(),
             usuarioProcurado.getCpf(),
             atualizarUsuarioRequest.getDataNascimento(),
+            usuarioProcurado.getImagemAvatar(),
             enderecoNovo);
 
         usuarioRepository.save(usuarioAtualizado);
