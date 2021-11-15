@@ -210,7 +210,7 @@ public class ReservaService {
 
     }
 
-    public void pagarReserva(Long idReserva, FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException {
+    public void pagarReserva(Long idReserva, FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException, ImpossivelPagarException {
 
         Reserva reserva = buscarReservaPorId(idReserva);
 
@@ -223,6 +223,8 @@ public class ReservaService {
                 reserva.getPagamento().setFormaEscolhida(formaPagamento);
                 reserva.setStatusReserva();
                 reservaRepository.save(reserva);
+            } else {
+                throw new ImpossivelPagarException();
             }
 
         } else {
@@ -235,5 +237,33 @@ public class ReservaService {
         }
     }
 
-    
+
+    public void cancelarReserva(Long idReserva) throws ReservaNaoEncontradaException, ImpossivelCancelarException {
+
+        Reserva reserva = buscarReservaPorId(idReserva);
+
+        if(reserva.getPagamento().getStatus().equals(StatusPagamento.PENDENTE)) {
+            reserva.getPagamento().setStatus(StatusPagamento.CANCELADO);
+            reserva.setStatusReserva();
+            reservaRepository.save(reserva);
+        } else {
+            throw new ImpossivelCancelarException();
+        }
+
+    }
+
+    public void estornarReserva(Long idReserva) throws ReservaNaoEncontradaException, ImpossivelEstornarException {
+
+        Reserva reserva = buscarReservaPorId(idReserva);
+
+        if(reserva.getPagamento().getStatus().equals(StatusPagamento.PAGO)) {
+            reserva.getPagamento().setStatus(StatusPagamento.ESTORNADO);
+            reserva.getPagamento().setFormaEscolhida(null);
+            reserva.setStatusReserva();
+            reservaRepository.save(reserva);
+        } else {
+            throw new ImpossivelEstornarException();
+        }
+
+    }
 }

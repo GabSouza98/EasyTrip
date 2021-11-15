@@ -42,8 +42,18 @@ public class ReservaController {
     }
 
     @PutMapping("/{idReserva}/pagamentos")
-    public void pagarReserva(@PathVariable Long idReserva, @Valid @RequestBody FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException {
+    public void pagarReserva(@PathVariable Long idReserva, @Valid @RequestBody FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException, ImpossivelPagarException {
         this.reservaService.pagarReserva(idReserva, formaPagamento);
+    }
+
+    @PutMapping("/{idReserva}/pagamentos/cancelar")
+    public void cancelarReserva(@PathVariable Long idReserva) throws ReservaNaoEncontradaException, ImpossivelCancelarException {
+        this.reservaService.cancelarReserva(idReserva);
+    }
+
+    @PutMapping("/{idReserva}/pagamentos/estornar")
+    public void estornarReserva(@PathVariable Long idReserva) throws ReservaNaoEncontradaException, ImpossivelEstornarException {
+        this.reservaService.estornarReserva(idReserva);
     }
 
 
