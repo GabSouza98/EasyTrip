@@ -43,23 +43,24 @@ public class ImovelService {
                 cadastrarImovelRequest.getTipoImovel(),
                 cadastrarImovelRequest.getEndereco(),
                 proprietario,
-                cadastrarImovelRequest.getCaracteristicas());
+                cadastrarImovelRequest.getCaracteristicas(),
+                true);
 
         imovelRepository.save(imovel);
         return imovel;
     }
 
     public List<Imovel> listarImoveis() {
-        return imovelRepository.findAll();
+        return imovelRepository.findByAtivoIsTrue();
     }
 
     public List<Imovel> listarImoveisPorIdProprietario(Long id) {
-        return imovelRepository.findByProprietarioId(id);
+        return imovelRepository.findByProprietarioIdAndAtivoIsTrue(id);
     }
 
-    public Imovel listarImovelPorId(Long idImovel) throws ImovelNaoEncontradoException {
+    public Imovel buscarImovelPorId(Long idImovel) throws ImovelNaoEncontradoException {
 
-        Optional<Imovel> imovelProcurado = imovelRepository.findById(idImovel);
+        Optional<Imovel> imovelProcurado = imovelRepository.findByIdAndAtivoIsTrue(idImovel);
         if(imovelProcurado.isPresent()) {
             return imovelProcurado.get();
         } else {
@@ -69,10 +70,10 @@ public class ImovelService {
 
     public void excluirImovelPorId(Long idImovel) throws ImovelNaoEncontradoException, ImovelAtreladoAnuncioAtivoException {
 
-        Imovel imovelProcurado = listarImovelPorId(idImovel);
-        //trocar por apenas verificaImovelAtreladoAnuncio?
+        Imovel imovelProcurado = buscarImovelPorId(idImovel);
         verificaImovelAtreladoAnuncioAtivo(idImovel);
-        imovelRepository.delete(imovelProcurado);
+        imovelProcurado.setAtivo(false);
+        imovelRepository.save(imovelProcurado);
 
     }
 

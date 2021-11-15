@@ -38,7 +38,7 @@ public class ImovelController {
 
     @GetMapping("/{idImovel}")
     public Imovel listarImovelPorId(@PathVariable Long idImovel) throws ImovelNaoEncontradoException {
-        return this.imovelService.listarImovelPorId(idImovel);
+        return this.imovelService.buscarImovelPorId(idImovel);
     }
 
     @DeleteMapping("/{idImovel}")

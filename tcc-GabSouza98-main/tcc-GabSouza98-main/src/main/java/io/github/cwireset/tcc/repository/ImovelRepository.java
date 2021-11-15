@@ -12,7 +12,8 @@ import java.util.Optional;
 public interface ImovelRepository extends CrudRepository<Imovel,Integer> {
 
     List<Imovel> findAll();
-    Optional<Imovel> findById(Long id);
-    List<Imovel> findByProprietarioId(Long id);
+    List<Imovel> findByAtivoIsTrue();
+    Optional<Imovel> findByIdAndAtivoIsTrue(Long id);
+    List<Imovel> findByProprietarioIdAndAtivoIsTrue(Long id);
 
 }

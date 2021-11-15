@@ -33,11 +33,11 @@ public class AnuncioService {
 
     public Anuncio cadastrarAnuncio(CadastrarAnuncioRequest cadastrarAnuncioRequest) throws ImovelNaoEncontradoException, UsuarioNaoEncontradoException, AnuncioDuplicadoException {
 
-        Imovel imovel = imovelService.listarImovelPorId(cadastrarAnuncioRequest.getIdImovel());
+        Imovel imovel = imovelService.buscarImovelPorId(cadastrarAnuncioRequest.getIdImovel());
         Usuario anunciante = usuarioService.buscarUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante());
 
-        //Verifica se o imóvel já está sendo anunciado em outro anúncio
-        if(!isNull(anuncioRepository.findByImovelId(cadastrarAnuncioRequest.getIdImovel()))) {
+        //Verifica se o imóvel já está sendo anunciado em outro anúncio ativo
+        if(!isNull(anuncioRepository.findByImovelIdAndImovelAtivoIsTrue(cadastrarAnuncioRequest.getIdImovel()))) {
             throw new AnuncioDuplicadoException(cadastrarAnuncioRequest.getIdImovel());
         }
 
@@ -55,7 +55,6 @@ public class AnuncioService {
     }
 
     public Boolean buscarPorImovelId(Long idImovel) {
-        //trocar por apenas findByImovelId?
         if(isNull(anuncioRepository.findByImovelIdAndAtivoIsTrue(idImovel))) {
             return false;
         } else {
@@ -74,7 +73,7 @@ public class AnuncioService {
 
     public Anuncio buscarAnuncioPorId(Long id) throws AnuncioNaoEncontradoException {
 
-        Optional<Anuncio> anuncioProcurado = anuncioRepository.findById(id);
+        Optional<Anuncio> anuncioProcurado = anuncioRepository.findByIdAndAtivoIsTrue(id);
         if(anuncioProcurado.isPresent()) {
             return anuncioProcurado.get();
         } else {

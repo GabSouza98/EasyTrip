@@ -1,5 +1,6 @@
 package io.github.cwireset.tcc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,5 +36,8 @@ public class Imovel {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_imovel")
     private List<CaracteristicaImovel> caracteristicas;
+
+    @JsonIgnore
+    private Boolean ativo;
 
 }

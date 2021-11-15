@@ -11,11 +11,11 @@ import java.util.Optional;
 @Repository
 public interface AnuncioRepository extends CrudRepository<Anuncio,Integer> {
 
-    Anuncio findByImovelId(Long idImovel);
+    Anuncio findByImovelIdAndImovelAtivoIsTrue(Long idImovel);
     List<Anuncio> findAll();
     List<Anuncio> findByAtivoIsTrue();
     List<Anuncio> findByAnuncianteIdAndAtivoIsTrue(Long id);
     Anuncio findByImovelIdAndAtivoIsTrue(Long id);
-    Optional<Anuncio> findById(Long id);
+    Optional<Anuncio> findByIdAndAtivoIsTrue(Long id);
 
 }

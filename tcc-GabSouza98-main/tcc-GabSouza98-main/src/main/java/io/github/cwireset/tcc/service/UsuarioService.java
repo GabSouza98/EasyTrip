@@ -25,8 +25,6 @@ public class UsuarioService {
     @Autowired
     private ClientFeign clientFeign;
 
-    ModelMapper modelMapper = new ModelMapper();
-
     public Usuario cadastrarUsuario(Usuario usuarioRequest) throws Exception {
 
         if(!isNull(usuarioRepository.findByEmailEquals(usuarioRequest.getEmail()))){
