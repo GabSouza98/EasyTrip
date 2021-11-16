@@ -6,8 +6,13 @@ import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.request.CadastrarAnuncioRequest;
 import io.github.cwireset.tcc.service.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,8 +31,8 @@ public class AnuncioController {
     }
 
     @GetMapping
-    public List<Anuncio> listarAnuncios() {
-        return this.anuncioService.listarAnuncios();
+    public Page<Anuncio> listarAnuncios(@PageableDefault(sort = "valorDiaria", direction = Sort.Direction.ASC) @ApiIgnore Pageable pageable) {
+        return this.anuncioService.listarAnuncios(pageable);
     }
 
     @GetMapping("/anunciantes/{idAnunciante}")

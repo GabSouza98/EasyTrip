@@ -10,6 +10,8 @@ import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.repository.AnuncioRepository;
 import io.github.cwireset.tcc.request.CadastrarAnuncioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,8 +64,12 @@ public class AnuncioService {
         }
     }
 
-    public List<Anuncio> listarAnuncios() {
-        return anuncioRepository.findByAtivoIsTrue();
+//    public List<Anuncio> listarAnuncios() {
+//        return anuncioRepository.findByAtivoIsTrue();
+//    }
+
+    public Page<Anuncio> listarAnuncios(Pageable pageable) {
+        return anuncioRepository.findByAtivoIsTrue(pageable);
     }
 
     public List<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante) {
@@ -87,4 +93,5 @@ public class AnuncioService {
         anuncioParaExcluir.setAtivo(false);
         anuncioRepository.save(anuncioParaExcluir);
     }
+
 }
