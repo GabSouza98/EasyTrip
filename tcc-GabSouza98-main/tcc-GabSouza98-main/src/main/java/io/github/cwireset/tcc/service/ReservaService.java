@@ -10,6 +10,8 @@ import io.github.cwireset.tcc.response.DadosAnuncioResponse;
 import io.github.cwireset.tcc.response.DadosSolicitanteResponse;
 import io.github.cwireset.tcc.response.InformacaoReservaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -163,35 +165,53 @@ public class ReservaService {
         return valorDiaria.multiply(temporario);
     }
 
-    public List<Reserva> consultarReservasPorSolicitante(Long id, Periodo periodo) throws UsuarioNaoEncontradoException {
+//    public List<Reserva> consultarReservasPorSolicitante(Long id, Periodo periodo) throws UsuarioNaoEncontradoException {
+//
+//        //Verifica se foi informado o período
+//        if(isNull(periodo)) {
+//            return reservaRepository.findBySolicitanteId(id);
+//        }
+//
+//        //Verifica se o período informado está completo
+//        if(!isNull(periodo)){
+//            if(isNull(periodo.getDataHoraFinal()) || isNull(periodo.getDataHoraInicial())) {
+//                return reservaRepository.findBySolicitanteId(id);
+//            }
+//        }
+//
+//        //Considera que qualquer interseção nas datas já retorna a reserva. Mesma lógica do CadastrarReserva
+////        Set<Reserva> reservas = new HashSet<>();
+////        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraFinalBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
+////            reservas.add(r);
+////        }
+////        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
+////            reservas.add(r);
+////        }
+////        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
+////            reservas.add(r);
+////        }
+////        List<Reserva> reservasFiltradas = new ArrayList<>(reservas);
+////
+//        List<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialGreaterThanEqualAndPeriodoDataHoraFinalLessThanEqual(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal());
+//
+//        return reservasFiltradas;
+//    }
+
+    public Page<Reserva> consultarReservasPorSolicitante(Long idSolicitante, Periodo periodo, Pageable pageable) {
 
         //Verifica se foi informado o período
         if(isNull(periodo)) {
-            return reservaRepository.findBySolicitanteId(id);
+            return reservaRepository.findBySolicitanteId(idSolicitante, pageable);
         }
 
         //Verifica se o período informado está completo
         if(!isNull(periodo)){
             if(isNull(periodo.getDataHoraFinal()) || isNull(periodo.getDataHoraInicial())) {
-                return reservaRepository.findBySolicitanteId(id);
+                return reservaRepository.findBySolicitanteId(idSolicitante, pageable);
             }
         }
 
-        //Considera que qualquer interseção nas datas já retorna a reserva. Mesma lógica do CadastrarReserva
-//        Set<Reserva> reservas = new HashSet<>();
-//        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraFinalBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-//            reservas.add(r);
-//        }
-//        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-//            reservas.add(r);
-//        }
-//        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-//            reservas.add(r);
-//        }
-//        List<Reserva> reservasFiltradas = new ArrayList<>(reservas);
-
-        List<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialAfterAndPeriodoDataHoraFinalBefore(id,periodo.getDataHoraInicial().minusSeconds(1),periodo.getDataHoraFinal().plusSeconds(1));
-
+        Page<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialGreaterThanEqualAndPeriodoDataHoraFinalLessThanEqual(idSolicitante,periodo.getDataHoraInicial(),periodo.getDataHoraFinal(), pageable);
         return reservasFiltradas;
     }
 
@@ -264,6 +284,7 @@ public class ReservaService {
         } else {
             throw new ImpossivelEstornarException();
         }
-
     }
+
+
 }

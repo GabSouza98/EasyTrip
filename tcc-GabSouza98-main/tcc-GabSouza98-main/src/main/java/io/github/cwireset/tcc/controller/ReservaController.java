@@ -11,9 +11,14 @@ import io.github.cwireset.tcc.request.CadastrarReservaRequest;
 import io.github.cwireset.tcc.response.InformacaoReservaResponse;
 import io.github.cwireset.tcc.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -32,8 +37,9 @@ public class ReservaController {
     }
 
     @GetMapping("/solicitantes/{idSolicitante}")
-    public List<Reserva> consultarReservasPorSolicitante(@PathVariable Long idSolicitante, Periodo periodo) throws UsuarioNaoEncontradoException {
-        return this.reservaService.consultarReservasPorSolicitante(idSolicitante, periodo);
+    public Page<Reserva> consultarReservasPorSolicitante(@PageableDefault(sort = "periodo.dataHoraFinal", direction = Sort.Direction.DESC) @ApiIgnore Pageable pageable,
+                                                         @PathVariable Long idSolicitante, Periodo periodo) throws UsuarioNaoEncontradoException {
+        return this.reservaService.consultarReservasPorSolicitante(idSolicitante, periodo, pageable);
     }
 
     @GetMapping("/anuncios/anunciantes/{idAnunciante}")
