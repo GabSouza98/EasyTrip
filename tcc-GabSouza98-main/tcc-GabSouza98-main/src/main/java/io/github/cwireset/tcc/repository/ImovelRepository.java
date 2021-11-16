@@ -19,6 +19,6 @@ public interface ImovelRepository extends CrudRepository<Imovel,Integer> {
 
     Optional<Imovel> findByIdAndAtivoIsTrue(Long id);
     List<Imovel> findByProprietarioIdAndAtivoIsTrue(Long id);
-
+    Page<Imovel> findByProprietarioIdAndAtivoIsTrue(Long id, Pageable pageable);
 
 }

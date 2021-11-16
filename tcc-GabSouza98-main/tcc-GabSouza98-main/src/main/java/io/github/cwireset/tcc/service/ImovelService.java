@@ -52,17 +52,20 @@ public class ImovelService {
         return imovel;
     }
 
-    public List<Imovel> listarImoveis() {
-        return imovelRepository.findByAtivoIsTrue();
-    }
+//    public List<Imovel> listarImoveis() {
+//        return imovelRepository.findByAtivoIsTrue();
+//    }
 
     public Page<Imovel> listarImoveis(Pageable pageable) {
         return imovelRepository.findByAtivoIsTrue(pageable);
     }
 
-
     public List<Imovel> listarImoveisPorIdProprietario(Long id) {
         return imovelRepository.findByProprietarioIdAndAtivoIsTrue(id);
+    }
+
+    public Page<Imovel> listarImoveisPorIdProprietario(Long idProprietario, Pageable pageable) {
+        return imovelRepository.findByProprietarioIdAndAtivoIsTrue(idProprietario, pageable);
     }
 
     public Imovel buscarImovelPorId(Long idImovel) throws ImovelNaoEncontradoException {

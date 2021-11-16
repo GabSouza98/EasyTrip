@@ -36,8 +36,9 @@ public class ImovelController {
     }
 
     @GetMapping("/proprietarios/{idProprietario}")
-    public List<Imovel> listarImovelPorIdProprietario(@PathVariable Long idProprietario) {
-        return this.imovelService.listarImoveisPorIdProprietario(idProprietario);
+    public Page<Imovel> listarImovelPorIdProprietario(@PageableDefault(sort = "identificacao") @ApiIgnore Pageable pageable,
+                                                      @PathVariable Long idProprietario) {
+        return this.imovelService.listarImoveisPorIdProprietario(idProprietario, pageable);
     }
 
     @GetMapping("/{idImovel}")
