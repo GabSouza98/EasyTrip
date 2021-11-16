@@ -24,15 +24,19 @@ public class Usuario {
 
     @NotBlank
     private String nome;
+
     @NotBlank
     @Email(message = "Email inválido")
     private String email;
+
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
+
     @NotBlank
     @Pattern(regexp = "\\d{11}", message = "O CPF deve ser informado no formato 99999999999.")
     private String cpf;
+    
     @NotNull
     private LocalDate dataNascimento;
 

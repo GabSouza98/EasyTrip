@@ -156,7 +156,6 @@ public class ReservaService {
                 dataHoraSaidaOriginal.getDayOfMonth());
 
         return Period.between(dataEntrada,dataSaida).getDays();
-
     }
 
     public BigDecimal calculaValorTotal(Periodo periodo, BigDecimal valorDiaria) {
@@ -164,38 +163,6 @@ public class ReservaService {
         BigDecimal temporario = new BigDecimal(quantidadeDias);
         return valorDiaria.multiply(temporario);
     }
-
-//    public List<Reserva> consultarReservasPorSolicitante(Long id, Periodo periodo) throws UsuarioNaoEncontradoException {
-//
-//        //Verifica se foi informado o período
-//        if(isNull(periodo)) {
-//            return reservaRepository.findBySolicitanteId(id);
-//        }
-//
-//        //Verifica se o período informado está completo
-//        if(!isNull(periodo)){
-//            if(isNull(periodo.getDataHoraFinal()) || isNull(periodo.getDataHoraInicial())) {
-//                return reservaRepository.findBySolicitanteId(id);
-//            }
-//        }
-//
-//        //Considera que qualquer interseção nas datas já retorna a reserva. Mesma lógica do CadastrarReserva
-////        Set<Reserva> reservas = new HashSet<>();
-////        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraFinalBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-////            reservas.add(r);
-////        }
-////        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBetween(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-////            reservas.add(r);
-////        }
-////        for(Reserva r : reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal())) {
-////            reservas.add(r);
-////        }
-////        List<Reserva> reservasFiltradas = new ArrayList<>(reservas);
-////
-//        List<Reserva> reservasFiltradas = reservaRepository.findBySolicitanteIdAndPeriodoDataHoraInicialGreaterThanEqualAndPeriodoDataHoraFinalLessThanEqual(id,periodo.getDataHoraInicial(),periodo.getDataHoraFinal());
-//
-//        return reservasFiltradas;
-//    }
 
     public Page<Reserva> consultarReservasPorSolicitante(Long idSolicitante, Periodo periodo, Pageable pageable) {
 

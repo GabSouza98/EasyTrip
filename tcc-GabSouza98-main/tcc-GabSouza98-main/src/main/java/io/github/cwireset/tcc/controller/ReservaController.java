@@ -38,7 +38,7 @@ public class ReservaController {
 
     @GetMapping("/solicitantes/{idSolicitante}")
     public Page<Reserva> consultarReservasPorSolicitante(@PageableDefault(sort = "periodo.dataHoraFinal", direction = Sort.Direction.DESC) @ApiIgnore Pageable pageable,
-                                                         @PathVariable Long idSolicitante, Periodo periodo) throws UsuarioNaoEncontradoException {
+                                                         @PathVariable Long idSolicitante, Periodo periodo) {
         return this.reservaService.consultarReservasPorSolicitante(idSolicitante, periodo, pageable);
     }
 
