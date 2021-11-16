@@ -19,6 +19,7 @@ public interface AnuncioRepository extends CrudRepository<Anuncio,Integer> {
     List<Anuncio> findByAtivoIsTrue();
     Page<Anuncio> findByAtivoIsTrue(Pageable pageable);
     List<Anuncio> findByAnuncianteIdAndAtivoIsTrue(Long id);
+    Page<Anuncio> findByAnuncianteIdAndAtivoIsTrue(Long id, Pageable pageable);
     Anuncio findByImovelIdAndAtivoIsTrue(Long id);
     Optional<Anuncio> findByIdAndAtivoIsTrue(Long id);
 

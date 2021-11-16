@@ -72,9 +72,12 @@ public class AnuncioService {
         return anuncioRepository.findByAtivoIsTrue(pageable);
     }
 
-    public List<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante) {
-        return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante);
+//    public List<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante) {
+//        return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante);
+//    }
 
+    public Page<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante, Pageable pageable) {
+        return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante, pageable);
     }
 
     public Anuncio buscarAnuncioPorId(Long id) throws AnuncioNaoEncontradoException {
@@ -93,5 +96,4 @@ public class AnuncioService {
         anuncioParaExcluir.setAtivo(false);
         anuncioRepository.save(anuncioParaExcluir);
     }
-
 }

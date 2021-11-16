@@ -36,8 +36,9 @@ public class AnuncioController {
     }
 
     @GetMapping("/anunciantes/{idAnunciante}")
-    public List<Anuncio> listarAnunciosPorIdAnunciante(@PathVariable Long idAnunciante) {
-        return this.anuncioService.listarAnunciosPorIdAnunciante(idAnunciante);
+    public Page<Anuncio> listarAnunciosPorIdAnunciante(@PageableDefault(sort = "valorDiaria", direction = Sort.Direction.ASC) @ApiIgnore Pageable pageable,
+                                                       @PathVariable Long idAnunciante) {
+        return this.anuncioService.listarAnunciosPorIdAnunciante(idAnunciante, pageable);
     }
 
     @DeleteMapping("/{idAnuncio}")
