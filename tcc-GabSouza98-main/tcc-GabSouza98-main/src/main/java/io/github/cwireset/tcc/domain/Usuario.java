@@ -36,7 +36,7 @@ public class Usuario {
     @NotBlank
     @Pattern(regexp = "\\d{11}", message = "O CPF deve ser informado no formato 99999999999.")
     private String cpf;
-    
+
     @NotNull
     private LocalDate dataNascimento;
 
