@@ -7,8 +7,12 @@ import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.request.CadastrarImovelRequest;
 import io.github.cwireset.tcc.service.ImovelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,8 +31,8 @@ public class ImovelController {
     }
 
     @GetMapping
-    public List<Imovel> listarImoveis() {
-        return this.imovelService.listarImoveis();
+    public Page<Imovel> listarImoveis(@PageableDefault(sort = "identificacao") @ApiIgnore Pageable pageable) {
+        return this.imovelService.listarImoveis(pageable);
     }
 
     @GetMapping("/proprietarios/{idProprietario}")
