@@ -52,10 +52,6 @@ public class ImovelService {
         return imovel;
     }
 
-//    public List<Imovel> listarImoveis() {
-//        return imovelRepository.findByAtivoIsTrue();
-//    }
-
     public Page<Imovel> listarImoveis(Pageable pageable) {
         return imovelRepository.findByAtivoIsTrue(pageable);
     }

@@ -4,8 +4,7 @@ import io.github.cwireset.tcc.domain.CaracteristicaImovel;
 import io.github.cwireset.tcc.domain.Endereco;
 import io.github.cwireset.tcc.domain.TipoImovel;
 import io.github.cwireset.tcc.domain.Usuario;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -16,6 +15,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CadastrarImovelRequest {
 
     @NotBlank
