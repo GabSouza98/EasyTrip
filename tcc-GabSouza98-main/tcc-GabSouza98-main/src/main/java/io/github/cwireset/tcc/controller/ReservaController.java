@@ -43,8 +43,9 @@ public class ReservaController {
     }
 
     @GetMapping("/anuncios/anunciantes/{idAnunciante}")
-    public List<Reserva> consultarReservasPorAnunciante(@PathVariable Long idAnunciante) {
-        return this.reservaService.consultarReservasPorAnunciante(idAnunciante);
+    public Page<Reserva> consultarReservasPorAnunciante(@PageableDefault(sort = "periodo.dataHoraFinal", direction = Sort.Direction.DESC) @ApiIgnore Pageable pageable,
+                                                        @PathVariable Long idAnunciante) {
+        return this.reservaService.consultarReservasPorAnunciante(idAnunciante, pageable);
     }
 
     @PutMapping("/{idReserva}/pagamentos")

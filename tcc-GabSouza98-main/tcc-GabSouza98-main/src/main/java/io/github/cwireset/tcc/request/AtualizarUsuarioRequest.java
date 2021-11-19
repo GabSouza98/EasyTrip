@@ -1,8 +1,7 @@
 package io.github.cwireset.tcc.request;
 
 import io.github.cwireset.tcc.domain.Endereco;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -14,6 +13,9 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AtualizarUsuarioRequest {
     @NotBlank
     private String nome;

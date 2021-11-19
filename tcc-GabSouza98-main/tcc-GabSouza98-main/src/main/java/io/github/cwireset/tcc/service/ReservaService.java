@@ -3,7 +3,7 @@ package io.github.cwireset.tcc.service;
 import io.github.cwireset.tcc.domain.*;
 import io.github.cwireset.tcc.exception.reserva.*;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
-import io.github.cwireset.tcc.repository.ReservaRepositoryDao;
+
 import io.github.cwireset.tcc.repository.ReservaRepository;
 import io.github.cwireset.tcc.request.CadastrarReservaRequest;
 import io.github.cwireset.tcc.response.DadosAnuncioResponse;
@@ -35,8 +35,8 @@ public class ReservaService {
     @Autowired
     private AnuncioService anuncioService;
 
-    @Autowired
-    private ReservaRepositoryDao reservaRepositoryDao;
+//    @Autowired
+//    private ReservaRepositoryDao reservaRepositoryDao;
 
     public InformacaoReservaResponse cadastrarReserva(CadastrarReservaRequest cadastrarReservaRequest) throws Exception {
 
@@ -68,13 +68,8 @@ public class ReservaService {
 //            throw new ConflitoAnuncioException();
 //        }
 
-        List<Reserva> listaPeriodoDataHoraInicialBetween = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBetween(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
-        List<Reserva> listaPeriodoDataHoraFinalBetween = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraFinalBetween(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
-        List<Reserva> listaPeriodoMenorQueAReserva = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraInicial(), periodoModificado.getDataHoraFinal());
-
-        if( !listaPeriodoDataHoraInicialBetween.isEmpty() ||
-            !listaPeriodoDataHoraFinalBetween.isEmpty() ||
-            !listaPeriodoMenorQueAReserva.isEmpty() ) {
+        List<Reserva> listaConflitos = reservaRepository.findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialLessThanEqualAndPeriodoDataHoraFinalGreaterThanEqual(cadastrarReservaRequest.getIdAnuncio(),periodoModificado.getDataHoraFinal(),periodoModificado.getDataHoraInicial());
+        if(!listaConflitos.isEmpty()) {
             throw new ConflitoAnuncioException();
         }
 
@@ -182,8 +177,12 @@ public class ReservaService {
         return reservasFiltradas;
     }
 
-    public List<Reserva> consultarReservasPorAnunciante(Long idAnunciante) {
-        return reservaRepository.findByAnuncioAnuncianteId(idAnunciante);
+//    public List<Reserva> consultarReservasPorAnunciante(Long idAnunciante) {
+//        return reservaRepository.findByAnuncioAnuncianteId(idAnunciante);
+//    }
+
+    public Page<Reserva> consultarReservasPorAnunciante(Long idAnunciante, Pageable pageable) {
+        return reservaRepository.findByAnuncioAnuncianteId(idAnunciante, pageable);
     }
 
     public Reserva buscarReservaPorId(Long id) throws ReservaNaoEncontradaException {
@@ -252,6 +251,4 @@ public class ReservaService {
             throw new ImpossivelEstornarException();
         }
     }
-
-
 }

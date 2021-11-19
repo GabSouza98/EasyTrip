@@ -117,6 +117,7 @@ public class UsuarioService {
             enderecoNovo);
 
         usuarioRepository.save(usuarioAtualizado);
+
         return buscarUsuarioPorId(id);
     }
 

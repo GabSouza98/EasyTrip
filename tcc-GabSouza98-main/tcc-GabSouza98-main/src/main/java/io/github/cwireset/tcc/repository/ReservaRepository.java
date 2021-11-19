@@ -21,19 +21,15 @@ public interface ReservaRepository extends CrudRepository<Reserva,Long> {
     List<Reserva> findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraFinalBetween(Long id, LocalDateTime d1, LocalDateTime d2);
     List<Reserva> findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBetween(Long id, LocalDateTime d1, LocalDateTime d2);
     List<Reserva> findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(Long id, LocalDateTime d1, LocalDateTime d2);
+    List<Reserva> findByAnuncioIdAndStatusReservaTrueAndPeriodoDataHoraInicialLessThanEqualAndPeriodoDataHoraFinalGreaterThanEqual(Long id, LocalDateTime d1, LocalDateTime d2);
 
     List<Reserva> findBySolicitanteId(Long id);
     Page<Reserva> findBySolicitanteId(Long id, Pageable pageable);
-
-    List<Reserva> findBySolicitanteIdAndPeriodoDataHoraFinalBetween(Long id, LocalDateTime d1, LocalDateTime d2);
-    List<Reserva> findBySolicitanteIdAndPeriodoDataHoraInicialBetween(Long id, LocalDateTime d1, LocalDateTime d2);
-    List<Reserva> findBySolicitanteIdAndPeriodoDataHoraInicialBeforeAndPeriodoDataHoraFinalAfter(Long id, LocalDateTime d1, LocalDateTime d2);
-
-    List<Reserva> findBySolicitanteIdAndPeriodoDataHoraInicialAfterAndPeriodoDataHoraFinalBefore(Long id, LocalDateTime d1, LocalDateTime d2);
 
     List<Reserva> findBySolicitanteIdAndPeriodoDataHoraInicialGreaterThanEqualAndPeriodoDataHoraFinalLessThanEqual(Long id, LocalDateTime d1, LocalDateTime d2);
     Page<Reserva> findBySolicitanteIdAndPeriodoDataHoraInicialGreaterThanEqualAndPeriodoDataHoraFinalLessThanEqual(Long id, LocalDateTime d1, LocalDateTime d2, Pageable pageable);
 
     List<Reserva> findByAnuncioAnuncianteId(Long id);
 
+    Page<Reserva> findByAnuncioAnuncianteId(Long idAnunciante, Pageable pageable);
 }
