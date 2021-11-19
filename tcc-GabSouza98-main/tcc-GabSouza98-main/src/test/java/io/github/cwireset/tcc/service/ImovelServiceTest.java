@@ -39,9 +39,6 @@ public class ImovelServiceTest {
     AnuncioService anuncioService;
 
     @Mock
-    AnuncioRepository anuncioRepository;
-
-    @Mock
     UsuarioService usuarioService;
 
     @InjectMocks
@@ -92,18 +89,7 @@ public class ImovelServiceTest {
             .ativo(true)
             .build();
 
-    List<FormaPagamento> formasAceitas;
 
-    Anuncio anuncio = Anuncio.builder()
-            .id(1L)
-            .tipoAnuncio(TipoAnuncio.COMPLETO)
-            .imovel(imovel)
-            .anunciante(usuario)
-            .valorDiaria(BigDecimal.valueOf(1000))
-            .formasAceitas(formasAceitas)
-            .descricao("blablabla")
-            .ativo(true)
-            .build();
 
     @Test
     public void testCadastrarImovelComSucesso() throws Exception {

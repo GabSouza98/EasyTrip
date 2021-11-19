@@ -31,12 +31,22 @@ public class AnuncioService {
     @Autowired
     private ImovelService imovelService;
 
-
-
     public Anuncio cadastrarAnuncio(CadastrarAnuncioRequest cadastrarAnuncioRequest) throws ImovelNaoEncontradoException, UsuarioNaoEncontradoException, AnuncioDuplicadoException {
 
-        Imovel imovel = imovelService.buscarImovelPorId(cadastrarAnuncioRequest.getIdImovel());
-        Usuario anunciante = usuarioService.buscarUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante());
+        Imovel imovel;
+        Usuario anunciante;
+
+        if(isNull(imovelService.buscarImovelPorId(cadastrarAnuncioRequest.getIdImovel()))) {
+            throw new ImovelNaoEncontradoException(cadastrarAnuncioRequest.getIdImovel());
+        } else {
+            imovel = imovelService.buscarImovelPorId(cadastrarAnuncioRequest.getIdImovel());
+        }
+
+        if(isNull(usuarioService.buscarUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante()))) {
+            throw new UsuarioNaoEncontradoException(cadastrarAnuncioRequest.getIdAnunciante());
+        } else {
+            anunciante = usuarioService.buscarUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante());
+        }
 
         //Verifica se o imóvel já está sendo anunciado em outro anúncio ativo
         if(!isNull(anuncioRepository.findByImovelIdAndImovelAtivoIsTrue(cadastrarAnuncioRequest.getIdImovel()))) {
@@ -64,17 +74,9 @@ public class AnuncioService {
         }
     }
 
-//    public List<Anuncio> listarAnuncios() {
-//        return anuncioRepository.findByAtivoIsTrue();
-//    }
-
     public Page<Anuncio> listarAnuncios(Pageable pageable) {
         return anuncioRepository.findByAtivoIsTrue(pageable);
     }
-
-//    public List<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante) {
-//        return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante);
-//    }
 
     public Page<Anuncio> listarAnunciosPorIdAnunciante(Long idAnunciante, Pageable pageable) {
         return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante, pageable);
@@ -91,7 +93,6 @@ public class AnuncioService {
     }
 
     public void excluirAnuncioPorId(Long idAnuncio) throws AnuncioNaoEncontradoException {
-
         Anuncio anuncioParaExcluir = buscarAnuncioPorId(idAnuncio);
         anuncioParaExcluir.setAtivo(false);
         anuncioRepository.save(anuncioParaExcluir);

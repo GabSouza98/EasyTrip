@@ -4,8 +4,7 @@ import io.github.cwireset.tcc.domain.FormaPagamento;
 import io.github.cwireset.tcc.domain.Imovel;
 import io.github.cwireset.tcc.domain.TipoAnuncio;
 import io.github.cwireset.tcc.domain.Usuario;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -17,6 +16,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CadastrarAnuncioRequest {
 
     @NotNull
