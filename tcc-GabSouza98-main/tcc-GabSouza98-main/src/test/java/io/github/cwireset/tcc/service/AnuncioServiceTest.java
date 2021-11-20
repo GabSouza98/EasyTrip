@@ -3,6 +3,7 @@ package io.github.cwireset.tcc.service;
 import io.github.cwireset.tcc.domain.*;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioDuplicadoException;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.repository.AnuncioRepository;
@@ -139,7 +140,7 @@ public class AnuncioServiceTest {
         when(usuarioService.buscarUsuarioPorId(anuncioRequest.getIdAnunciante())).thenReturn(null);
 
         //Assert
-        UsuarioNaoEncontradoException exception = assertThrows(UsuarioNaoEncontradoException.class, () ->
+        TipoDominioNaoEncontradoException exception = assertThrows(TipoDominioNaoEncontradoException.class, () ->
                 anuncioService.cadastrarAnuncio(anuncioRequest));
         assertEquals(expected, exception.getMessage());
     }
@@ -152,7 +153,7 @@ public class AnuncioServiceTest {
         when(imovelService.buscarImovelPorId(anuncioRequest.getIdImovel())).thenReturn(null);
 
         //Assert
-        ImovelNaoEncontradoException exception = assertThrows(ImovelNaoEncontradoException.class, () ->
+        TipoDominioNaoEncontradoException exception = assertThrows(TipoDominioNaoEncontradoException.class, () ->
                 anuncioService.cadastrarAnuncio(anuncioRequest));
         assertEquals(expected, exception.getMessage());
     }
@@ -225,7 +226,7 @@ public class AnuncioServiceTest {
         //Act
         when(anuncioRepository.findByIdAndAtivoIsTrue(anuncio.getId())).thenReturn(Optional.empty());
         //Assert
-        AnuncioNaoEncontradoException exception = assertThrows(AnuncioNaoEncontradoException.class, () ->
+        TipoDominioNaoEncontradoException exception = assertThrows(TipoDominioNaoEncontradoException.class, () ->
                 anuncioService.excluirAnuncioPorId(anuncio.getId()));
         assertEquals(expected, exception.getMessage());
     }
@@ -241,6 +242,26 @@ public class AnuncioServiceTest {
         anuncio.setAtivo(false);
         assertEquals(anuncio, anuncioArgumentCaptor.getValue());
         assertFalse(anuncioArgumentCaptor.getValue().getAtivo());
+    }
+
+    @Test
+    void testBuscarPorImovelId_DeveRetornarTrue() throws Exception {
+        //Arrange
+        when(anuncioRepository.findByImovelIdAndAtivoIsTrue(anyLong())).thenReturn(anuncio);
+        //Act
+        Boolean pesquisa = anuncioService.buscarPorImovelId(anuncio.getImovel().getId());
+        //Assert
+        assertTrue(pesquisa);
+    }
+
+    @Test
+    void testBuscarPorImovelId_DeveRetornarFalse() throws Exception {
+        //Arrange
+        when(anuncioRepository.findByImovelIdAndAtivoIsTrue(anyLong())).thenReturn(null);
+        //Act
+        Boolean pesquisa = anuncioService.buscarPorImovelId(anuncio.getImovel().getId());
+        //Assert
+        assertFalse(pesquisa);
     }
 
 }

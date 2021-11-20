@@ -2,6 +2,7 @@ package io.github.cwireset.tcc.controller;
 
 import io.github.cwireset.tcc.domain.Anuncio;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.request.CadastrarAnuncioRequest;
 import io.github.cwireset.tcc.service.AnuncioService;
@@ -42,7 +43,7 @@ public class AnuncioController {
     }
 
     @DeleteMapping("/{idAnuncio}")
-    public void excluirAnuncio(@PathVariable Long idAnuncio) throws AnuncioNaoEncontradoException {
+    public void excluirAnuncio(@PathVariable Long idAnuncio) throws TipoDominioNaoEncontradoException {
         this.anuncioService.excluirAnuncioPorId(idAnuncio);
     }
 

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +23,16 @@ public class DadosAnuncioResponse {
     private List<FormaPagamento> formasAceitas;
     private String descricao;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DadosAnuncioResponse that = (DadosAnuncioResponse) o;
+        return Objects.equals(id, that.id) && Objects.equals(imovel, that.imovel) && Objects.equals(anunciante, that.anunciante) && Objects.equals(formasAceitas, that.formasAceitas) && Objects.equals(descricao, that.descricao);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, imovel, anunciante, formasAceitas, descricao);
+    }
 }

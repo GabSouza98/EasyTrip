@@ -1,5 +1,7 @@
 package io.github.cwireset.tcc.service;
 
+import io.github.cwireset.tcc.domain.TipoDominio;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.externalAPI.ClientFeign;
 import io.github.cwireset.tcc.externalAPI.PostDTO;
 import io.github.cwireset.tcc.domain.Endereco;
@@ -54,20 +56,16 @@ public class UsuarioService {
         return usuario;
     }
 
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
-    }
-
     public Page<Usuario> listarUsuarios(Pageable pageable) {
         return usuarioRepository.findAll(pageable);
     }
 
-    public Usuario buscarUsuarioPorId(Long idUsuario) throws UsuarioNaoEncontradoException {
+    public Usuario buscarUsuarioPorId(Long idUsuario) throws TipoDominioNaoEncontradoException {
         Optional<Usuario> usuarioProcurado = usuarioRepository.findById(idUsuario);
         if(usuarioProcurado.isPresent()) {
             return usuarioProcurado.get();
         } else {
-            throw new UsuarioNaoEncontradoException(idUsuario);
+            throw new TipoDominioNaoEncontradoException(TipoDominio.USUARIO,idUsuario);
         }
     }
 
@@ -82,7 +80,7 @@ public class UsuarioService {
         }
     }
 
-    public Usuario atualizarUsuario(Long id, AtualizarUsuarioRequest atualizarUsuarioRequest) throws UsuarioNaoEncontradoException, CpfDuplicadoException, EmailDuplicadoException {
+    public Usuario atualizarUsuario(Long id, AtualizarUsuarioRequest atualizarUsuarioRequest) throws EmailDuplicadoException, TipoDominioNaoEncontradoException {
 
         //Verificar se o ID existe
         Usuario usuarioProcurado = buscarUsuarioPorId(id);

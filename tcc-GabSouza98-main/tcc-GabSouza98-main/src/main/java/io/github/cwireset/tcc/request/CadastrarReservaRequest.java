@@ -1,8 +1,7 @@
 package io.github.cwireset.tcc.request;
 
 import io.github.cwireset.tcc.domain.Periodo;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Embedded;
 import javax.validation.Valid;
@@ -11,6 +10,8 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CadastrarReservaRequest {
 
     @NotNull

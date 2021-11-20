@@ -2,9 +2,11 @@ package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.Anuncio;
 import io.github.cwireset.tcc.domain.Imovel;
+import io.github.cwireset.tcc.domain.TipoDominio;
 import io.github.cwireset.tcc.domain.Usuario;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioDuplicadoException;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.repository.AnuncioRepository;
@@ -31,19 +33,19 @@ public class AnuncioService {
     @Autowired
     private ImovelService imovelService;
 
-    public Anuncio cadastrarAnuncio(CadastrarAnuncioRequest cadastrarAnuncioRequest) throws ImovelNaoEncontradoException, UsuarioNaoEncontradoException, AnuncioDuplicadoException {
+    public Anuncio cadastrarAnuncio(CadastrarAnuncioRequest cadastrarAnuncioRequest) throws AnuncioDuplicadoException, TipoDominioNaoEncontradoException {
 
         Imovel imovel;
         Usuario anunciante;
 
         if(isNull(imovelService.buscarImovelPorId(cadastrarAnuncioRequest.getIdImovel()))) {
-            throw new ImovelNaoEncontradoException(cadastrarAnuncioRequest.getIdImovel());
+            throw new TipoDominioNaoEncontradoException(TipoDominio.IMOVEL, cadastrarAnuncioRequest.getIdImovel());
         } else {
             imovel = imovelService.buscarImovelPorId(cadastrarAnuncioRequest.getIdImovel());
         }
 
         if(isNull(usuarioService.buscarUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante()))) {
-            throw new UsuarioNaoEncontradoException(cadastrarAnuncioRequest.getIdAnunciante());
+            throw new TipoDominioNaoEncontradoException(TipoDominio.USUARIO, cadastrarAnuncioRequest.getIdAnunciante());
         } else {
             anunciante = usuarioService.buscarUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante());
         }
@@ -82,17 +84,17 @@ public class AnuncioService {
         return anuncioRepository.findByAnuncianteIdAndAtivoIsTrue(idAnunciante, pageable);
     }
 
-    public Anuncio buscarAnuncioPorId(Long id) throws AnuncioNaoEncontradoException {
+    public Anuncio buscarAnuncioPorId(Long id) throws TipoDominioNaoEncontradoException {
 
         Optional<Anuncio> anuncioProcurado = anuncioRepository.findByIdAndAtivoIsTrue(id);
         if(anuncioProcurado.isPresent()) {
             return anuncioProcurado.get();
         } else {
-            throw new AnuncioNaoEncontradoException(id);
+            throw new TipoDominioNaoEncontradoException(TipoDominio.ANUNCIO, id);
         }
     }
 
-    public void excluirAnuncioPorId(Long idAnuncio) throws AnuncioNaoEncontradoException {
+    public void excluirAnuncioPorId(Long idAnuncio) throws TipoDominioNaoEncontradoException {
         Anuncio anuncioParaExcluir = buscarAnuncioPorId(idAnuncio);
         anuncioParaExcluir.setAtivo(false);
         anuncioRepository.save(anuncioParaExcluir);

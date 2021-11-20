@@ -2,6 +2,7 @@ package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.Endereco;
 import io.github.cwireset.tcc.domain.Usuario;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.CpfDuplicadoException;
 import io.github.cwireset.tcc.exception.usuario.CpfNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.EmailDuplicadoException;
@@ -184,7 +185,7 @@ public class UsuarioServiceTest {
         //Act
         when(usuarioRepository.findById(usuario.getId())).thenReturn(Optional.empty());
         //Assert
-        UsuarioNaoEncontradoException exception = Assertions.assertThrows(UsuarioNaoEncontradoException.class,
+        TipoDominioNaoEncontradoException exception = Assertions.assertThrows(TipoDominioNaoEncontradoException.class,
                 () -> usuarioService.buscarUsuarioPorId(usuario.getId()));
         assertEquals(expected, exception.getMessage());
     }
@@ -220,7 +221,7 @@ public class UsuarioServiceTest {
         //Act
         when(usuarioRepository.findById(usuario.getId())).thenReturn(Optional.empty());
         //Assert
-        UsuarioNaoEncontradoException exception = Assertions.assertThrows(UsuarioNaoEncontradoException.class,
+        TipoDominioNaoEncontradoException exception = Assertions.assertThrows(TipoDominioNaoEncontradoException.class,
                 () -> usuarioService.atualizarUsuario(1L,atualizarUsuarioRequest));
         assertEquals(expected, exception.getMessage());
     }

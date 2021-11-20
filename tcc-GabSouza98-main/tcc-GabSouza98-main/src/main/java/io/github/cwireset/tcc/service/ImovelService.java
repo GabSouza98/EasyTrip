@@ -1,7 +1,9 @@
 package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.Imovel;
+import io.github.cwireset.tcc.domain.TipoDominio;
 import io.github.cwireset.tcc.domain.Usuario;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelAtreladoAnuncioAtivoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
@@ -30,12 +32,12 @@ public class ImovelService {
     @Autowired
     private AnuncioService anuncioService;
 
-    public Imovel cadastrarImovel(CadastrarImovelRequest cadastrarImovelRequest) throws UsuarioNaoEncontradoException {
+    public Imovel cadastrarImovel(CadastrarImovelRequest cadastrarImovelRequest) throws TipoDominioNaoEncontradoException {
 
         Usuario proprietario;
 
         if(isNull(usuarioService.buscarUsuarioPorId(cadastrarImovelRequest.getIdProprietario()))){
-            throw new UsuarioNaoEncontradoException(cadastrarImovelRequest.getIdProprietario());
+            throw new TipoDominioNaoEncontradoException(TipoDominio.USUARIO, cadastrarImovelRequest.getIdProprietario());
         } else {
             proprietario = usuarioService.buscarUsuarioPorId(cadastrarImovelRequest.getIdProprietario());
         }
@@ -56,25 +58,25 @@ public class ImovelService {
         return imovelRepository.findByAtivoIsTrue(pageable);
     }
 
-    public List<Imovel> listarImoveisPorIdProprietario(Long id) {
-        return imovelRepository.findByProprietarioIdAndAtivoIsTrue(id);
-    }
+//    public List<Imovel> listarImoveisPorIdProprietario(Long id) {
+//        return imovelRepository.findByProprietarioIdAndAtivoIsTrue(id);
+//    }
 
     public Page<Imovel> listarImoveisPorIdProprietario(Long idProprietario, Pageable pageable) {
         return imovelRepository.findByProprietarioIdAndAtivoIsTrue(idProprietario, pageable);
     }
 
-    public Imovel buscarImovelPorId(Long idImovel) throws ImovelNaoEncontradoException {
+    public Imovel buscarImovelPorId(Long idImovel) throws TipoDominioNaoEncontradoException {
 
         Optional<Imovel> imovelProcurado = imovelRepository.findByIdAndAtivoIsTrue(idImovel);
         if(imovelProcurado.isPresent()) {
             return imovelProcurado.get();
         } else {
-            throw new ImovelNaoEncontradoException(idImovel);
+            throw new TipoDominioNaoEncontradoException(TipoDominio.IMOVEL, idImovel);
         }
     }
 
-    public void excluirImovelPorId(Long idImovel) throws ImovelNaoEncontradoException, ImovelAtreladoAnuncioAtivoException {
+    public void excluirImovelPorId(Long idImovel) throws ImovelAtreladoAnuncioAtivoException, TipoDominioNaoEncontradoException {
 
         Imovel imovelProcurado = buscarImovelPorId(idImovel);
         verificaImovelAtreladoAnuncioAtivo(idImovel);

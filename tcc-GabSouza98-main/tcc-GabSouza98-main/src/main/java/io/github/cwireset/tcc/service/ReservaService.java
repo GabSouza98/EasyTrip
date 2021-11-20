@@ -1,6 +1,7 @@
 package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.*;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.reserva.*;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 
@@ -49,12 +50,11 @@ public class ReservaService {
         BigDecimal valorTotal = calculaValorTotal(periodoModificado, anuncio.getValorDiaria());
 
         //mudei para o periodo nao modificado
-        if(periodoModificado.getDataHoraFinal().isBefore(periodoModificado.getDataHoraInicial())) {
+        if(cadastrarReservaRequest.getPeriodo().getDataHoraFinal().isBefore(cadastrarReservaRequest.getPeriodo().getDataHoraInicial())) {
             throw new DataSaidaMenorQueDataEntradaException();
         }
 
-        //mudei para o periodo nao modificado
-        if(calculaDias(periodoModificado)<1) {
+        if(calculaDias(cadastrarReservaRequest.getPeriodo())<1) {
             throw new NumeroMinimoDiariasException();
         }
 
@@ -73,17 +73,13 @@ public class ReservaService {
             throw new ConflitoAnuncioException();
         }
 
-        if(anuncio.getImovel().getTipoImovel().equals(TipoImovel.HOTEL)) {
-            if(cadastrarReservaRequest.getQuantidadePessoas() < 2) {
-                throw new QuantidadePessoasInsuficienteException(2, TipoImovel.HOTEL.getNome());
-            }
+        if(cadastrarReservaRequest.getQuantidadePessoas() < anuncio.getImovel().getTipoImovel().getPessoasMinimo()) {
+            throw new QuantidadePessoasInsuficienteException(anuncio.getImovel().getTipoImovel().getPessoasMinimo(), anuncio.getImovel().getTipoImovel().getNome());
         }
 
-        if(anuncio.getImovel().getTipoImovel().equals(TipoImovel.POUSADA)) {
-            Integer dias = calculaDias(cadastrarReservaRequest.getPeriodo());
-            if(dias<5){
-                throw new QuantidadeDiasInsuficienteException(5, TipoImovel.POUSADA.getNome());
-            }
+        Integer dias = calculaDias(cadastrarReservaRequest.getPeriodo());
+        if(dias<anuncio.getImovel().getTipoImovel().getDiariasMinimo()){
+            throw new QuantidadeDiasInsuficienteException(anuncio.getImovel().getTipoImovel().getDiariasMinimo(), anuncio.getImovel().getTipoImovel().getNome());
         }
 
         Reserva reserva = new Reserva(null,
@@ -177,26 +173,22 @@ public class ReservaService {
         return reservasFiltradas;
     }
 
-//    public List<Reserva> consultarReservasPorAnunciante(Long idAnunciante) {
-//        return reservaRepository.findByAnuncioAnuncianteId(idAnunciante);
-//    }
-
     public Page<Reserva> consultarReservasPorAnunciante(Long idAnunciante, Pageable pageable) {
         return reservaRepository.findByAnuncioAnuncianteId(idAnunciante, pageable);
     }
 
-    public Reserva buscarReservaPorId(Long id) throws ReservaNaoEncontradaException {
+    public Reserva buscarReservaPorId(Long id) throws TipoDominioNaoEncontradoException {
 
         Optional<Reserva> reserva = reservaRepository.findById(id);
         if (reserva.isPresent()){
             return reserva.get();
         } else {
-            throw new ReservaNaoEncontradaException(id);
+            throw new TipoDominioNaoEncontradoException(TipoDominio.RESERVA, id);
         }
 
     }
 
-    public void pagarReserva(Long idReserva, FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException, ImpossivelPagarException {
+    public void pagarReserva(Long idReserva, FormaPagamento formaPagamento) throws FormaPagamentoInvalidaException, ImpossivelRealizarOperacaoException, TipoDominioNaoEncontradoException {
 
         Reserva reserva = buscarReservaPorId(idReserva);
 
@@ -210,7 +202,7 @@ public class ReservaService {
                 reserva.setStatusReserva();
                 reservaRepository.save(reserva);
             } else {
-                throw new ImpossivelPagarException();
+                throw new ImpossivelRealizarOperacaoException(StatusPagamento.PAGO,StatusPagamento.PENDENTE);
             }
 
         } else {
@@ -224,7 +216,7 @@ public class ReservaService {
     }
 
 
-    public void cancelarReserva(Long idReserva) throws ReservaNaoEncontradaException, ImpossivelCancelarException {
+    public void cancelarReserva(Long idReserva) throws ImpossivelRealizarOperacaoException, TipoDominioNaoEncontradoException {
 
         Reserva reserva = buscarReservaPorId(idReserva);
 
@@ -233,12 +225,12 @@ public class ReservaService {
             reserva.setStatusReserva();
             reservaRepository.save(reserva);
         } else {
-            throw new ImpossivelCancelarException();
+            throw new ImpossivelRealizarOperacaoException(StatusPagamento.CANCELADO,StatusPagamento.PENDENTE);
         }
 
     }
 
-    public void estornarReserva(Long idReserva) throws ReservaNaoEncontradaException, ImpossivelEstornarException {
+    public void estornarReserva(Long idReserva) throws ImpossivelRealizarOperacaoException, TipoDominioNaoEncontradoException {
 
         Reserva reserva = buscarReservaPorId(idReserva);
 
@@ -248,7 +240,7 @@ public class ReservaService {
             reserva.setStatusReserva();
             reservaRepository.save(reserva);
         } else {
-            throw new ImpossivelEstornarException();
+            throw new ImpossivelRealizarOperacaoException(StatusPagamento.ESTORNADO,StatusPagamento.PAGO);
         }
     }
 }

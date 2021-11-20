@@ -1,6 +1,7 @@
 package io.github.cwireset.tcc.service;
 
 import io.github.cwireset.tcc.domain.*;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelAtreladoAnuncioAtivoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
@@ -117,7 +118,7 @@ public class ImovelServiceTest {
         when(usuarioService.buscarUsuarioPorId(cadastrarImovelRequest.getIdProprietario())).thenReturn(null);
 
         //Assert
-        UsuarioNaoEncontradoException exception = assertThrows(UsuarioNaoEncontradoException.class, () ->
+        TipoDominioNaoEncontradoException exception = assertThrows(TipoDominioNaoEncontradoException.class, () ->
                 imovelService.cadastrarImovel(cadastrarImovelRequest));
         assertEquals(expected, exception.getMessage());
     }
@@ -183,7 +184,7 @@ public class ImovelServiceTest {
         //Act
         when(imovelRepository.findByIdAndAtivoIsTrue(imovel.getId())).thenReturn(Optional.empty());
         //Assert
-        ImovelNaoEncontradoException exception = assertThrows(ImovelNaoEncontradoException.class, () ->
+        TipoDominioNaoEncontradoException exception = assertThrows(TipoDominioNaoEncontradoException.class, () ->
                 imovelService.buscarImovelPorId(imovel.getId()));
         assertEquals(expected, exception.getMessage());
     }
@@ -195,7 +196,7 @@ public class ImovelServiceTest {
         //Act
 
         //Assert
-        ImovelNaoEncontradoException exception = assertThrows(ImovelNaoEncontradoException.class, () ->
+        TipoDominioNaoEncontradoException exception = assertThrows(TipoDominioNaoEncontradoException.class, () ->
                 imovelService.excluirImovelPorId(imovel.getId()));
         assertEquals(expected, exception.getMessage());
     }
@@ -216,11 +217,11 @@ public class ImovelServiceTest {
     @Test
     void testExcluirImovel_DeveExcluirImovel() throws Exception {
         //Arrange
-        //Act
         when(imovelRepository.findByIdAndAtivoIsTrue(imovel.getId())).thenReturn(Optional.of(imovel));
         when(anuncioService.buscarPorImovelId(imovel.getId())).thenReturn(false);
-        //Assert
+        //Act
         imovelService.excluirImovelPorId(imovel.getId());
+        //Assert
         verify(imovelRepository).save(imovelArgumentCaptor.capture());
 
         imovel.setAtivo(false);

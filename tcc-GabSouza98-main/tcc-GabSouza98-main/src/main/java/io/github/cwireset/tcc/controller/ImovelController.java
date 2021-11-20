@@ -1,6 +1,7 @@
 package io.github.cwireset.tcc.controller;
 
 import io.github.cwireset.tcc.domain.Imovel;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelAtreladoAnuncioAtivoException;
 import io.github.cwireset.tcc.exception.imovel.ImovelNaoEncontradoException;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
@@ -26,7 +27,7 @@ public class ImovelController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Imovel cadastrarImovel(@Valid @RequestBody CadastrarImovelRequest cadastrarImovelRequest) throws UsuarioNaoEncontradoException {
+    public Imovel cadastrarImovel(@Valid @RequestBody CadastrarImovelRequest cadastrarImovelRequest) throws TipoDominioNaoEncontradoException {
         return this.imovelService.cadastrarImovel(cadastrarImovelRequest);
     }
 
@@ -42,12 +43,12 @@ public class ImovelController {
     }
 
     @GetMapping("/{idImovel}")
-    public Imovel listarImovelPorId(@PathVariable Long idImovel) throws ImovelNaoEncontradoException {
+    public Imovel listarImovelPorId(@PathVariable Long idImovel) throws TipoDominioNaoEncontradoException {
         return this.imovelService.buscarImovelPorId(idImovel);
     }
 
     @DeleteMapping("/{idImovel}")
-    public void excluirImovel(@PathVariable Long idImovel) throws ImovelNaoEncontradoException, ImovelAtreladoAnuncioAtivoException {
+    public void excluirImovel(@PathVariable Long idImovel) throws ImovelAtreladoAnuncioAtivoException, TipoDominioNaoEncontradoException {
         this.imovelService.excluirImovelPorId(idImovel);
 
     }

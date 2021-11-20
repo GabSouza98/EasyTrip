@@ -6,8 +6,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
+@Builder
 @Entity
+@AllArgsConstructor
 public class Reserva {
 
     @Id
@@ -48,7 +51,7 @@ public class Reserva {
         this.quantidadePessoas = quantidadePessoas;
         this.dataHoraReserva = dataHoraReserva;
         this.pagamento = pagamento;
-        this.statusReserva = setStatusReserva();
+        this.statusReserva = true;
     }
 
     public Long getId() {
@@ -111,12 +114,25 @@ public class Reserva {
         return statusReserva;
     }
 
-    public Boolean setStatusReserva() {
+    public void setStatusReserva() {
 
         if (this.pagamento.getStatus().equals(StatusPagamento.PAGO) || this.pagamento.getStatus().equals(StatusPagamento.PENDENTE)) {
-            return true;
+            this.statusReserva = true;
         } else {
-            return false;
+            this.statusReserva = false;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return Objects.equals(id, reserva.id) && Objects.equals(solicitante, reserva.solicitante) && Objects.equals(anuncio, reserva.anuncio) && Objects.equals(periodo, reserva.periodo) && Objects.equals(quantidadePessoas, reserva.quantidadePessoas) && Objects.equals(pagamento, reserva.pagamento) && Objects.equals(statusReserva, reserva.statusReserva);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, solicitante, anuncio, periodo, quantidadePessoas, dataHoraReserva, pagamento, statusReserva);
     }
 }

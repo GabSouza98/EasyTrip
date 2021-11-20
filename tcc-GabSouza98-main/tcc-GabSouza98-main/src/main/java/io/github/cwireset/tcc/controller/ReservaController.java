@@ -5,6 +5,7 @@ import io.github.cwireset.tcc.domain.FormaPagamento;
 import io.github.cwireset.tcc.domain.Periodo;
 import io.github.cwireset.tcc.domain.Reserva;
 import io.github.cwireset.tcc.exception.anuncio.AnuncioNaoEncontradoException;
+import io.github.cwireset.tcc.exception.generica.TipoDominioNaoEncontradoException;
 import io.github.cwireset.tcc.exception.reserva.*;
 import io.github.cwireset.tcc.exception.usuario.UsuarioNaoEncontradoException;
 import io.github.cwireset.tcc.request.CadastrarReservaRequest;
@@ -49,17 +50,17 @@ public class ReservaController {
     }
 
     @PutMapping("/{idReserva}/pagamentos")
-    public void pagarReserva(@PathVariable Long idReserva, @Valid @RequestBody FormaPagamento formaPagamento) throws ReservaNaoEncontradaException, FormaPagamentoInvalidaException, ImpossivelPagarException {
+    public void pagarReserva(@PathVariable Long idReserva, @Valid @RequestBody FormaPagamento formaPagamento) throws FormaPagamentoInvalidaException, ImpossivelRealizarOperacaoException, TipoDominioNaoEncontradoException {
         this.reservaService.pagarReserva(idReserva, formaPagamento);
     }
 
     @PutMapping("/{idReserva}/pagamentos/cancelar")
-    public void cancelarReserva(@PathVariable Long idReserva) throws ReservaNaoEncontradaException, ImpossivelCancelarException {
+    public void cancelarReserva(@PathVariable Long idReserva) throws ImpossivelRealizarOperacaoException, TipoDominioNaoEncontradoException {
         this.reservaService.cancelarReserva(idReserva);
     }
 
     @PutMapping("/{idReserva}/pagamentos/estornar")
-    public void estornarReserva(@PathVariable Long idReserva) throws ReservaNaoEncontradaException, ImpossivelEstornarException {
+    public void estornarReserva(@PathVariable Long idReserva) throws ImpossivelRealizarOperacaoException, TipoDominioNaoEncontradoException {
         this.reservaService.estornarReserva(idReserva);
     }
 
