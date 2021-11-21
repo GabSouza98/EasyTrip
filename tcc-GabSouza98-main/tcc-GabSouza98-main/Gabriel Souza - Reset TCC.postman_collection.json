@@ -1,0 +1,3326 @@
+{
+	"info": {
+		"_postman_id": "35175e77-5117-4432-bf62-bb43190e380d",
+		"name": "Gabriel Souza - Reset TCC",
+		"description": "Api Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "anuncios",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/anuncios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"anuncios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Rica pousada\",\n    \"idAnunciante\": 1,\n    \"idImovel\": 4,\n    \"tipoAnuncio\": \"COMPLETO\",\n    \"valorDiaria\": 1000,\n    \"formasAceitas\": [\n        \"DINHEIRO\",\n        \"CARTAO_CREDITO\"\n    ]\n    \n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/anuncios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"anuncios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarPorAnunciante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/anuncios/anunciantes/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"anuncios",
+								"anunciantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/anuncios/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"anuncios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "imoveis",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/imoveis",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"imoveis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarPorProprietario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/imoveis/proprietarios/1011",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"imoveis",
+								"proprietarios",
+								"1011"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"endereco\": {\n        \"bairro\": \"NOVO BAIRRO\",\n        \"cep\": \"97054-450\",\n        \"cidade\": \"Florianópolis\",\n        \"estado\": \"SC\",\n        \"logradouro\": \"Rua das Traíras\",\n        \"numero\": \"480\",\n        \"complemento\": \"\"\n    },\n    \"idProprietario\": 1,\n    \"identificacao\": \"Casa grande perto da praia\",\n    \"tipoImovel\": \"CASA\",\n    \"caracteristicas\": [\n        {\n            \"descricao\": \"3 quartos\"\n        },\n        {\n            \"descricao\": \"1 suite\"\n        },\n        {\n            \"descricao\": \"2 banheiros\"\n        },\n        {\n            \"descricao\": \"1 piscina\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/imoveis",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"imoveis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/imoveis/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"imoveis",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/imoveis/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"imoveis",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reservas",
+			"item": [
+				{
+					"name": "salvar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 18:00:00\",\n        \"dataHoraFinal\": \"2021-11-07 16:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarPorAnunciante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservas/anuncios/anunciantes/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservas",
+								"anuncios",
+								"anunciantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarPorSolicitante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservas/solicitantes/2?dataHoraFinal=2022-10-20 12:00:00&dataHoraInicial=2020-10-10 14:00:00&size=3&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservas",
+								"solicitantes",
+								"2"
+							],
+							"query": [
+								{
+									"key": "dataHoraFinal",
+									"value": "2022-10-20 12:00:00"
+								},
+								{
+									"key": "dataHoraInicial",
+									"value": "2020-10-10 14:00:00"
+								},
+								{
+									"key": "size",
+									"value": "3"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pagar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"DINHEIRO\""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reservas/:idReserva/pagamentos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservas",
+								":idReserva",
+								"pagamentos"
+							],
+							"variable": [
+								{
+									"key": "idReserva",
+									"value": "1",
+									"description": "(Required) idReserva"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservas/:idReserva/pagamentos/cancelar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservas",
+								":idReserva",
+								"pagamentos",
+								"cancelar"
+							],
+							"variable": [
+								{
+									"key": "idReserva",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "estornar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reservas/:idReserva/pagamentos/estornar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reservas",
+								":idReserva",
+								"pagamentos",
+								"estornar"
+							],
+							"variable": [
+								{
+									"key": "idReserva",
+									"value": "1",
+									"description": "(Required) idReserva"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "salvar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body is correct\", function () {\r",
+									"    pm.expect(json.nome).to.be.a('Usuario Um')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"12334595070\",\n    \"dataNascimento\": \"1980-01-01\",\n    \"email\": \"qsdasda@gmail.com\",\n    \"nome\": \"Baaaaaaa\",\n    \"senha\": \"super_secreto\",\n    \"endereco\": {\n        \"bairro\": \"Centro\",\n        \"cep\": \"96505-660\",\n        \"cidade\": \"Pelotas\",\n        \"estado\": \"RS\",\n        \"logradouro\": \"Rua Cidade Fantasma\",\n        \"numero\": \"102\",\n        \"complemento\": \"Esquina com Rua dos Bobos\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar por CPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/cpf/52109560756",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"cpf",
+								"52109560756"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dataNascimento\": \"1981-01-01\",\n    \"email\": \"atualizaaado@gmail.com\",\n    \"nome\": \"TESTE\",\n    \"senha\": \"qpwaerritaytuuiri\",\n    \"endereco\": {\n        \"bairro\": \"MUaaaDEI\",\n        \"cep\": \"93032-130\",\n        \"cidade\": \"NOVOHAMBURGO\",\n        \"estado\": \"RS\",\n        \"logradouro\": \"Alameda dos Anjos\",\n        \"numero\": \"1024\",\n        \"complemento\": \"PRTAF\"        \n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TESTES",
+			"item": [
+				{
+					"name": "Cadastrar Usuarios",
+					"item": [
+						{
+							"name": "primeiroSave Com Endereço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Nome correto\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    pm.expect(responseJson.nome).to.eql(\"Banana\");\r",
+											"    console.log(responseJson.nome);\r",
+											"    pm.expect(responseJson).to.not.have.property(\"senha\")  \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"08211155070\",\n    \"dataNascimento\": \"1980-01-01\",\n    \"email\": \"teste1@gmail.com\",\n    \"nome\": \"Banana\",\n    \"senha\": \"super_secreto\",\n    \"endereco\": {\n        \"bairro\": \"Centro\",\n        \"cep\": \"96505-660\",\n        \"cidade\": \"Pelotas\",\n        \"estado\": \"RS\",\n        \"logradouro\": \"Rua Cidade Fantasma\",\n        \"numero\": \"102\",\n        \"complemento\": \"Esquina com Rua dos Bobos\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CPFDuplicado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Nome correto\", function () {\r",
+											"const responseJson = pm.response.json();\r",
+											"    pm.expect(responseJson.message).to.eql(\"Já existe um recurso do tipo Usuario com CPF com o valor '08211155070'.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"08211155070\",\n    \"dataNascimento\": \"1980-01-01\",\n    \"email\": \"teste2@gmail.com\",\n    \"nome\": \"Usuario Um\",\n    \"senha\": \"super_secreto\",\n    \"endereco\": {\n        \"bairro\": \"Centro\",\n        \"cep\": \"96505-660\",\n        \"cidade\": \"Pelotas\",\n        \"estado\": \"RS\",\n        \"logradouro\": \"Rua Cidade Fantasma\",\n        \"numero\": \"102\",\n        \"complemento\": \"Esquina com Rua dos Bobos\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "EmailDuplicado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"08211199070\",\n    \"dataNascimento\": \"1980-01-01\",\n    \"email\": \"teste1@gmail.com\",\n    \"nome\": \"Usuario Um\",\n    \"senha\": \"super_secreto\",\n    \"endereco\": {\n        \"bairro\": \"Centro\",\n        \"cep\": \"96505-660\",\n        \"cidade\": \"Pelotas\",\n        \"estado\": \"RS\",\n        \"logradouro\": \"Rua Cidade Fantasma\",\n        \"numero\": \"102\",\n        \"complemento\": \"Esquina com Rua dos Bobos\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "segundoSave Sem Endereço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cpf\": \"11211155070\",\n    \"dataNascimento\": \"1980-01-01\",\n    \"email\": \"teste2@gmail.com\",\n    \"nome\": \"Alface\",\n    \"senha\": \"super_secreto\"    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar e Buscar Usuarios",
+					"item": [
+						{
+							"name": "listar Primeiro",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].nome).to.eql(\"Alface\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(2);\r",
+											"    pm.expect(responseJson.totalElements).to.eql(2);\r",
+											"    pm.expect(responseJson.number).to.eql(0);\r",
+											"    pm.expect(responseJson.size).to.eql(1);\r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/usuarios?page=0&size=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listar Todos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].nome).to.eql(\"Alface\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);\r",
+											"    pm.expect(responseJson.totalElements).to.eql(2);    \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/usuarios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "buscar por CPF Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"CPF Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Usuario com CPF com o valor '11111111111' foi encontrado.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/cpf/11111111111",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"cpf",
+										"11111111111"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "buscar por CPF existente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"CPF Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.id).to.eql(1);        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/cpf/08211155070",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"cpf",
+										"08211155070"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "buscar por id Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Usuario com Id com o valor '3' foi encontrado.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "buscar por id Existente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"CPF Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.id).to.eql(2);        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Atualiza Usuarios",
+					"item": [
+						{
+							"name": "atualizar Usuario 1 tirando seu Endereço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Tira Endereço\", function () {\r",
+											"    const responseJson = pm.response.json();    \r",
+											"    pm.expect(responseJson.endereco).to.eql(null);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dataNascimento\": \"1981-01-01\",\n    \"email\": \"trocou_email@gmail.com\",\n    \"nome\": \"TESTE\",\n    \"senha\": \"qpwaerritaytuuiri\"    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "atualizar Usuario 2 com EmailDuplicado",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Tira Endereço\", function () {\r",
+											"    const responseJson = pm.response.json();    \r",
+											"    pm.expect(responseJson.message).to.eql(\"Já existe um recurso do tipo Usuario com E-Mail com o valor 'trocou_email@gmail.com'.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dataNascimento\": \"1981-01-01\",\n    \"email\": \"trocou_email@gmail.com\",\n    \"nome\": \"TESTE\",\n    \"senha\": \"qpwaerritaytuuiri\"    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "atualizar Usuario 2 com Novo Endereço",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Coloca Endereço\", function () {\r",
+											"    const responseJson = pm.response.json();    \r",
+											"    pm.expect(responseJson.endereco.id).to.eql(2);\r",
+											"    pm.expect(responseJson.email).to.eql(\"email_nao_repetido@gmail.com\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dataNascimento\": \"1981-01-01\",\n    \"email\": \"email_nao_repetido@gmail.com\",\n    \"nome\": \"TesteNovo\",\n    \"senha\": \"qpwaerritaytuuiri\",\n    \"endereco\": {\n        \"bairro\": \"Centro\",\n        \"cep\": \"96505-660\",\n        \"cidade\": \"Pelotas\",\n        \"estado\": \"RS\",\n        \"logradouro\": \"Rua Cidade Fantasma\",\n        \"numero\": \"102\",\n        \"complemento\": \"Esquina com Rua dos Bobos\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/usuarios/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"usuarios",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cadastrar Imoveis",
+					"item": [
+						{
+							"name": "salvar Imovel com Usuario Invalido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Usuario com Id com o valor '3' foi encontrado.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"endereco\": {\n        \"bairro\": \"NOVO BAIRRO\",\n        \"cep\": \"97054-450\",\n        \"cidade\": \"Florianópolis\",\n        \"estado\": \"SC\",\n        \"logradouro\": \"Rua das Traíras\",\n        \"numero\": \"480\",\n        \"complemento\": \"\"\n    },\n    \"idProprietario\": 3,\n    \"identificacao\": \"Casa grande perto da praia\",\n    \"tipoImovel\": \"CASA\",\n    \"caracteristicas\": [\n        {\n            \"descricao\": \"3 quartos\"\n        },\n        {\n            \"descricao\": \"1 suite\"\n        },\n        {\n            \"descricao\": \"2 banheiros\"\n        },\n        {\n            \"descricao\": \"1 piscina\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/imoveis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar Imovel Casa Valido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.proprietario.id).to.eql(1);\r",
+											"    pm.expect(responseJson.id).to.eql(1);   \r",
+											"    pm.expect(responseJson.endereco.id).to.eql(3); \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"endereco\": {\n        \"bairro\": \"NOVO BAIRRO\",\n        \"cep\": \"97054-450\",\n        \"cidade\": \"Florianópolis\",\n        \"estado\": \"SC\",\n        \"logradouro\": \"Rua das Traíras\",\n        \"numero\": \"480\",\n        \"complemento\": \"\"\n    },\n    \"idProprietario\": 1,\n    \"identificacao\": \"Casa grande perto da praia\",\n    \"tipoImovel\": \"CASA\",\n    \"caracteristicas\": [\n        {\n            \"descricao\": \"3 quartos\"\n        },\n        {\n            \"descricao\": \"1 suite\"\n        },\n        {\n            \"descricao\": \"2 banheiros\"\n        },\n        {\n            \"descricao\": \"1 piscina\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/imoveis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar Imovel Hotel Valido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.proprietario.id).to.eql(1);\r",
+											"    pm.expect(responseJson.id).to.eql(2);   \r",
+											"    pm.expect(responseJson.endereco.id).to.eql(4); \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"endereco\": {\n        \"bairro\": \"NOVO BAIRRO\",\n        \"cep\": \"97054-450\",\n        \"cidade\": \"Florianópolis\",\n        \"estado\": \"SC\",\n        \"logradouro\": \"Rua das Traíras\",\n        \"numero\": \"480\",\n        \"complemento\": \"\"\n    },\n    \"idProprietario\": 1,\n    \"identificacao\": \"Casa grande perto da praia\",\n    \"tipoImovel\": \"HOTEL\",\n    \"caracteristicas\": [\n        {\n            \"descricao\": \"3 quartos\"\n        },\n        {\n            \"descricao\": \"1 suite\"\n        },\n        {\n            \"descricao\": \"2 banheiros\"\n        },\n        {\n            \"descricao\": \"1 piscina\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/imoveis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar Imovel Pousada Valido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.proprietario.id).to.eql(1);\r",
+											"    pm.expect(responseJson.id).to.eql(3);   \r",
+											"    pm.expect(responseJson.endereco.id).to.eql(5); \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"endereco\": {\n        \"bairro\": \"NOVO BAIRRO\",\n        \"cep\": \"97054-450\",\n        \"cidade\": \"Florianópolis\",\n        \"estado\": \"SC\",\n        \"logradouro\": \"Rua das Traíras\",\n        \"numero\": \"480\",\n        \"complemento\": \"\"\n    },\n    \"idProprietario\": 1,\n    \"identificacao\": \"Aaa primeiro da lista\",\n    \"tipoImovel\": \"POUSADA\",\n    \"caracteristicas\": [\n        {\n            \"descricao\": \"3 quartos\"\n        },\n        {\n            \"descricao\": \"1 suite\"\n        },\n        {\n            \"descricao\": \"2 banheiros\"\n        },\n        {\n            \"descricao\": \"1 piscina\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/imoveis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar e Buscar Imoveis",
+					"item": [
+						{
+							"name": "listar Todos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].identificacao).to.eql(\"Aaa primeiro da lista\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);       \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listar Todos Pageable",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].identificacao).to.eql(\"Aaa primeiro da lista\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(2);\r",
+											"    pm.expect(responseJson.totalElements).to.eql(3);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(2); \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis?page=0&size=2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluir Imovel Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Imovel com Id com o valor '4' foi encontrado.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis/4",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluir Imovel Existente (1)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listar Todos Após Exclusão",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].identificacao).to.eql(\"Aaa primeiro da lista\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);   \r",
+											"    pm.expect(responseJson.totalElements).to.eql(2);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(2);   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cadastrar Anuncios",
+					"item": [
+						{
+							"name": "salvar com usuario Invalido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Usuario com Id com o valor '3' foi encontrado.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Rica pousada\",\n    \"idAnunciante\": 3,\n    \"idImovel\": 2,\n    \"tipoAnuncio\": \"COMPLETO\",\n    \"valorDiaria\": 1000,\n    \"formasAceitas\": [\n        \"DINHEIRO\",\n        \"CARTAO_CREDITO\",\n        \"CARTAO_DEBITO\"\n    ]\n    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Imovel Excluido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Imovel com Id com o valor '1' foi encontrado.\");       \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Rica pousada\",\n    \"idAnunciante\": 1,\n    \"idImovel\": 1,\n    \"tipoAnuncio\": \"COMPLETO\",\n    \"valorDiaria\": 1000,\n    \"formasAceitas\": [\n        \"DINHEIRO\",\n        \"CARTAO_CREDITO\",\n        \"CARTAO_DEBITO\"\n    ]\n    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Imovel(Hotel) Valido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.imovel.proprietario.id).to.eql(1);\r",
+											"    pm.expect(responseJson.id).to.eql(1);   \r",
+											"    pm.expect(responseJson.imovel.id).to.eql(2); \r",
+											"    pm.expect(responseJson.anunciante.id).to.eql(1);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Rica pousada\",\n    \"idAnunciante\": 1,\n    \"idImovel\": 2,\n    \"tipoAnuncio\": \"COMPLETO\",\n    \"valorDiaria\": 1000,\n    \"formasAceitas\": [\n        \"DINHEIRO\",\n        \"CARTAO_CREDITO\",\n        \"CARTAO_DEBITO\"\n    ]\n    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Imovel Repetido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Imovel Repetido\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Já existe um recurso do tipo Anuncio com IdImovel com o valor '2'.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Rica pousada\",\n    \"idAnunciante\": 1,\n    \"idImovel\": 2,\n    \"tipoAnuncio\": \"COMPLETO\",\n    \"valorDiaria\": 1000,\n    \"formasAceitas\": [\n        \"DINHEIRO\",\n        \"CARTAO_CREDITO\",\n        \"CARTAO_DEBITO\"\n    ]\n    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Imovel(Pousada) Valido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.imovel.proprietario.id).to.eql(1);\r",
+											"    pm.expect(responseJson.id).to.eql(2);   \r",
+											"    pm.expect(responseJson.imovel.id).to.eql(3); \r",
+											"    pm.expect(responseJson.anunciante.id).to.eql(1);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"descricao\": \"Rica pousada\",\n    \"idAnunciante\": 1,\n    \"idImovel\": 3,\n    \"tipoAnuncio\": \"COMPLETO\",\n    \"valorDiaria\": 500,\n    \"formasAceitas\": [\n        \"DINHEIRO\",\n        \"CARTAO_CREDITO\",\n        \"CARTAO_DEBITO\"\n    ]\n    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar e Buscar Anuncios",
+					"item": [
+						{
+							"name": "Listar Todos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].valorDiaria).to.eql(500);\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(2);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(2);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarPorAnunciante Vazio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    pm.expect(responseJson.totalPages).to.eql(0);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(0);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(0);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/anuncios/anunciantes/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios",
+										"anunciantes",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarPorAnunciante Preenchido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].valorDiaria).to.eql(500);\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(2);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(2);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/anuncios/anunciantes/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios",
+										"anunciantes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluir Anuncio Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Anuncio com Id com o valor '3' foi encontrado.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/anuncios/3",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cadastrar Reservas",
+					"item": [
+						{
+							"name": "salvar com Usuario Invalido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Usuario com Id com o valor '3' foi encontrado.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 3,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 18:00:00\",\n        \"dataHoraFinal\": \"2021-11-07 16:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Anuncio Invalido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Nenhum(a) Anuncio com Id com o valor '3' foi encontrado.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 3,\n    \"idSolicitante\": 1,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 18:00:00\",\n        \"dataHoraFinal\": \"2021-11-07 16:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Anunciante Igual Solicitante",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"O solicitante de uma reserva não pode ser o próprio anunciante.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 1,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 18:00:00\",\n        \"dataHoraFinal\": \"2021-11-07 16:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com DataSaidaMenorQueEntrada",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Período inválido! A data final da reserva precisa ser maior do que a data inicial.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 18:00:00\",\n        \"dataHoraFinal\": \"2021-11-04 16:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com NumeroMinimoDiarias",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Período inválido! O número mínimo de diárias precisa ser maior ou igual à 1.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-06 20:00:00\"       \n    },\n    \"quantidadePessoas\": 10\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com QuantidadePessoasInsuficiente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Não é possivel realizar uma reserva com menos de 2 pessoas para imóveis do tipo Hotel\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-06 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-07 12:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com QuantidadeDiariasInsuficiente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Não é possivel realizar uma reserva com menos de 5 diárias para imóveis do tipo Pousada\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 2,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-10 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-14 12:00:00\"       \n    },\n    \"quantidadePessoas\": 1\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.idReserva).to.eql(1);\r",
+											"    pm.expect(responseJson.solicitante.id).to.eql(2);    \r",
+											"    pm.expect(responseJson.anuncio.id).to.eql(1);\r",
+											"    pm.expect(responseJson.anuncio.imovel.id).to.eql(2); \r",
+											"    pm.expect(responseJson.anuncio.anunciante.id).to.eql(1);\r",
+											"    pm.expect(responseJson.pagamento.valorTotal).to.eql(10000);\r",
+											"    pm.expect(responseJson.pagamento.formaEscolhida).to.eql(null);\r",
+											"    pm.expect(responseJson.pagamento.status).to.eql(\"PENDENTE\");         \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-10 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-20 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Conflito de Data 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Este anuncio já esta reservado para o período informado.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-08 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-12 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Conflito de Data 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Este anuncio já esta reservado para o período informado.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-12 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-20 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Conflito de Data 3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Este anuncio já esta reservado para o período informado.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-12 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-18 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Conflito de Data 4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Este anuncio já esta reservado para o período informado.\");        \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-08 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-22 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Sucesso Limite Anterior",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.idReserva).to.eql(2); \r",
+											"    pm.expect(responseJson.pagamento.valorTotal).to.eql(2000);            \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-08 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-10 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "salvar com Sucesso Limite Posterior",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salvo Com Sucesso\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.idReserva).to.eql(3); \r",
+											"    pm.expect(responseJson.pagamento.valorTotal).to.eql(2000);            \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"idAnuncio\": 1,\n    \"idSolicitante\": 2,\n    \"periodo\": {\n        \"dataHoraInicial\": \"2021-11-20 14:00:00\",\n        \"dataHoraFinal\": \"2021-11-22 12:00:00\"       \n    },\n    \"quantidadePessoas\": 2\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar Reservas",
+					"item": [
+						{
+							"name": "listarPorSolicitante Periodo Completo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].id).to.eql(3);\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(3);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(3);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/solicitantes/2?dataHoraFinal=2021-11-22 12:00:00&dataHoraInicial=2021-11-08 12:00:00&size=10&page=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"solicitantes",
+										"2"
+									],
+									"query": [
+										{
+											"key": "dataHoraFinal",
+											"value": "2021-11-22 12:00:00"
+										},
+										{
+											"key": "dataHoraInicial",
+											"value": "2021-11-08 12:00:00"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarPorSolicitante Periodo Nao Completo",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].id).to.eql(3);\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(1);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(1);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/solicitantes/2?dataHoraFinal=2021-11-22 12:00:00&dataHoraInicial=2021-11-16 12:00:00&size=10&page=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"solicitantes",
+										"2"
+									],
+									"query": [
+										{
+											"key": "dataHoraFinal",
+											"value": "2021-11-22 12:00:00"
+										},
+										{
+											"key": "dataHoraInicial",
+											"value": "2021-11-16 12:00:00"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarPorSolicitante Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();    \r",
+											"    pm.expect(responseJson.content).to.be.empty;\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(0);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(0);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(0);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/solicitantes/1?dataHoraFinal=2021-11-22 12:00:00&dataHoraInicial=2021-11-16 12:00:00&size=10&page=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"solicitantes",
+										"1"
+									],
+									"query": [
+										{
+											"key": "dataHoraFinal",
+											"value": "2021-11-22 12:00:00"
+										},
+										{
+											"key": "dataHoraInicial",
+											"value": "2021-11-16 12:00:00"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarPorAnunciante unico",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].id).to.eql(3);\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(3);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(3);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/anuncios/anunciantes/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"anuncios",
+										"anunciantes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listarPorAnunciante Inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();    \r",
+											"    pm.expect(responseJson.content).to.be.empty;\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(0);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(0);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(0);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/anuncios/anunciantes/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"anuncios",
+										"anunciantes",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pagar/Cancelar/Estornar Reservas",
+					"item": [
+						{
+							"name": "pagar Forma Aceita (para estornar)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"DINHEIRO\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas/1/pagamentos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"1",
+										"pagamentos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pagar Forma Aceita DINHEIRO",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"DINHEIRO\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas/3/pagamentos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"3",
+										"pagamentos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "pagar Forma Nao Aceita",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"O anúncio não aceita PIX como forma de pagamento. As formas aceitas são DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO.\");       \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\"PIX\""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reservas/2/pagamentos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"2",
+										"pagamentos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancelar Reserva Paga",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Não é possível realizar o cancelamento para esta reserva, pois ela não está no status PENDENTE.\");       \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/1/pagamentos/cancelar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"1",
+										"pagamentos",
+										"cancelar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cancelar Reserva Pendente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/2/pagamentos/cancelar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"2",
+										"pagamentos",
+										"cancelar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "estornar Reserva Paga",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/1/pagamentos/estornar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"1",
+										"pagamentos",
+										"estornar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "estornar Reserva Nao Paga",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Id Inexistente\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Não é possível realizar o estorno para esta reserva, pois ela não está no status PAGO.\");       \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/2/pagamentos/estornar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"2",
+										"pagamentos",
+										"estornar"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Listar Reservas Após Operações",
+					"item": [
+						{
+							"name": "listarPorSolicitante Periodo Completo Após Opearações",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();        \r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].id).to.eql(3);\r",
+											"    pm.expect(arrayContent[0].pagamento.status).to.eql(\"PAGO\");\r",
+											"    pm.expect(arrayContent[0].pagamento.formaEscolhida).to.eql(\"DINHEIRO\");\r",
+											"    pm.expect(arrayContent[1].pagamento.status).to.eql(\"ESTORNADO\");\r",
+											"    pm.expect(arrayContent[1].pagamento.formaEscolhida).to.eql(null);\r",
+											"    pm.expect(arrayContent[2].pagamento.status).to.eql(\"CANCELADO\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(3);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(3);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/solicitantes/2?dataHoraFinal=2021-11-22 12:00:00&dataHoraInicial=2021-11-08 12:00:00&size=10&page=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"solicitantes",
+										"2"
+									],
+									"query": [
+										{
+											"key": "dataHoraFinal",
+											"value": "2021-11-22 12:00:00"
+										},
+										{
+											"key": "dataHoraInicial",
+											"value": "2021-11-08 12:00:00"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exclusão Lógica Teste",
+					"item": [
+						{
+							"name": "excluir Imovel(2) Com Anuncio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Imovel Atrelado a Anuncio\", function () {\r",
+											"    const responseJson = pm.response.json();      \r",
+											"    pm.expect(responseJson.message).to.eql(\"Não é possível excluir um imóvel que possua um anúncio.\");   \r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluir Anuncio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/anuncios/1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "excluir Imovel(2) Com Anuncio Excluido",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/imoveis/2",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"imoveis",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar Anuncio Após Exclusão",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].valorDiaria).to.eql(500);\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(1);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(1);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/anuncios",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"anuncios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar Reserva Após Exclusao Anuncio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Paginacao Correta\", function () {\r",
+											"    const responseJson = pm.response.json();        \r",
+											"    const arrayContent = responseJson.content;  \r",
+											"    pm.expect(arrayContent[0].id).to.eql(3);\r",
+											"    pm.expect(arrayContent[0].pagamento.status).to.eql(\"PAGO\");\r",
+											"    pm.expect(arrayContent[1].pagamento.status).to.eql(\"ESTORNADO\");\r",
+											"    pm.expect(arrayContent[2].pagamento.status).to.eql(\"CANCELADO\");\r",
+											"    pm.expect(responseJson.sort.sorted).to.eql(true);\r",
+											"    pm.expect(responseJson.totalPages).to.eql(1);     \r",
+											"    pm.expect(responseJson.totalElements).to.eql(3);   \r",
+											"    pm.expect(responseJson.numberOfElements).to.eql(3);      \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/reservas/solicitantes/2?dataHoraFinal=2021-11-22 12:00:00&dataHoraInicial=2021-11-08 12:00:00&size=10&page=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reservas",
+										"solicitantes",
+										"2"
+									],
+									"query": [
+										{
+											"key": "dataHoraFinal",
+											"value": "2021-11-22 12:00:00"
+										},
+										{
+											"key": "dataHoraInicial",
+											"value": "2021-11-08 12:00:00"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
