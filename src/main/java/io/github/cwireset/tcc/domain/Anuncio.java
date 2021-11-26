@@ -22,11 +22,11 @@ public class Anuncio {
     @Enumerated(EnumType.STRING)
     private TipoAnuncio tipoAnuncio;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_imovel")
     private Imovel imovel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_anunciante")
     private Usuario anunciante;
 
@@ -37,5 +37,8 @@ public class Anuncio {
     private List<FormaPagamento> formasAceitas;
 
     private String descricao;
+
+    @JsonIgnore
+    private Boolean ativo;
 
 }
