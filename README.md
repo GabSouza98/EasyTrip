@@ -1,7 +1,3 @@
-# Projeto Final Gabriel Souza - CWI RESET - 3ª Edição
-
-[Documentação Original](https://github.com/cwi-reset/edicao-03-level-2/tree/master/TCC)
-
 # EasyTrip
 
 O projeto EasyTrip tem o objetivo de facilitar a jornada do usuário ao procurar e realizar hospedagens. Para os que desejam encontrar uma boa oportunidade, o sistema conta com a possibilidade de busca de opções anunciadas a partir dos menores preços, e para os que desejam anunciar e gerenciar suas reservas, é possível realizar buscas para melhor organizar a gestão do imóvel. 
